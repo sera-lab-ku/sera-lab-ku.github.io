@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seralab.korea.ac.kr/sitemap-index.xml

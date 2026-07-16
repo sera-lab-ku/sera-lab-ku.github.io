@@ -1,0 +1,46 @@
+---
+import { navigation } from "../data/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isCurrent = (href: string) => currentPath === href || (href !== "/" && currentPath.startsWith(href));
+---
+
+<header class="site-header" data-header>
+  <div class="site-header__inner shell">
+    <a class="brand" href="/" aria-label="SERA Lab home">
+      <span class="brand__mark" aria-hidden="true">S</span>
+      <span class="brand__type">
+        <strong>SERA LAB.</strong>
+        <small>KU · CSE</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation" data-menu>
+      {navigation.map((item) => (
+        <a class:list={{ "site-nav__link": true, "is-current": isCurrent(item.href) }} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+      <a class="site-nav__contact" href="/contact/">Contact <span aria-hidden="true">↗</span></a>
+    </nav>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = header?.classList.toggle("is-menu-open") ?? false;
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+</script>

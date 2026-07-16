@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { researchAreas } from "../data/site";
+---
+
+<BaseLayout title="Research — SERA Lab." description="Research areas at SERA Lab: extended reality, edge AI, and learning-driven infrastructure.">
+  <PageIntro
+    eyebrow="Research"
+    title="We design for the moment a system becomes real."
+    copy="SERA studies systems that need to work under real constraints: changing networks, limited devices, demanding users, and intelligence that must earn its place."
+  />
+
+  <section class="section section--paper research-detail">
+    <div class="shell">
+      {researchAreas.map((area, index) => (
+        <article class="research-detail__row">
+          <div class="research-detail__index"><span>{area.index}</span><span>0{index + 1} / 03</span></div>
+          <div class="research-detail__main">
+            <h2>{area.title}</h2>
+            <p>{area.description}</p>
+            <ul class="tag-list">{area.tags.map((tag) => <li>{tag}</li>)}</ul>
+          </div>
+          <div class={`research-detail__visual research-detail__visual--${index + 1}`} aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--fog">
+    <div class="shell research-principles">
+      <p class="eyebrow">How we work</p>
+      <div class="research-principles__grid">
+        <p>Measure the system.<br /><em>Respect the constraint.</em></p>
+        <ul>
+          <li><span>01</span> Begin from a real systems bottleneck.</li>
+          <li><span>02</span> Connect algorithmic ideas to end-to-end behavior.</li>
+          <li><span>03</span> Judge success by what users and systems can actually sustain.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
