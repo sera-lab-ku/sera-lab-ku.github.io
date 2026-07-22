@@ -25,7 +25,7 @@ const campusBackground = await getImage({
     <div class="shell">
       {researchAreas.map((area, index) => (
         <article class="research-detail__row">
-          <div class="research-detail__index"><span>{area.index}</span><span>0{index + 1} / 03</span></div>
+          <div class="research-detail__index"><span>{area.index}</span></div>
           <div class="research-detail__main">
             <h2>{area.title}</h2>
             <p>{area.description}</p>
