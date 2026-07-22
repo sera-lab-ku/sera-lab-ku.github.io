@@ -142,6 +142,7 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
   border-bottom: 1px solid rgba(255,255,255,0.18);
 }
 .brand { display: inline-flex; gap: 0.66rem; align-items: center; width: max-content; }
+.brand__ku-logo { width: auto; height: 3.25rem; flex: 0 0 auto; filter: drop-shadow(0 1px 4px rgba(255,255,255,0.25)); }
 .brand__mark {
   display: grid;
   width: 2rem;
@@ -541,6 +542,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 
 @media (max-width: 680px) {
   .site-header__inner { min-height: 5rem; }
+  .brand__ku-logo { height: 2.7rem; }
   .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 0.75rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; background: var(--ink); transform: translateY(-0.8rem); transition: opacity 180ms ease, transform 180ms ease; }
   .site-header.is-menu-open .site-nav { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .site-nav__link { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
