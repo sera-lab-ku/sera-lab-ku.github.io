@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import labLife from "../../photo/photo_0.jpg";
+import teamNight from "../../photo/photo_1.jpg";
+import campusPicnic from "../../photo/photo_2.jpg";
+import celebration from "../../photo/photo_3.jpg";
+
+const photos = [
+  {
+    image: campusPicnic,
+    alt: "SERA Lab members enjoying a picnic together on the Korea University campus",
+    label: "고려대학교 중짜 봄 피크닉"
+  },
+  {
+    image: labLife,
+    alt: "A SERA Lab member holding a laptop during a gathering in the lab",
+    label: "랩장 일상"
+  },
+  {
+    image: teamNight,
+    alt: "SERA Lab members taking a group selfie during an evening out",
+    label: "저녁 회식"
+  },
+  {
+    image: celebration,
+    alt: "SERA Lab members celebrating together with flowers and a cake",
+    label: "스승의 날, 감사합니다!"
+  }
+];
+---
+
+<BaseLayout title="Photos — SERA Lab." description="Moments from research, campus life, and the SERA Lab community at Korea University.">
+  <PageIntro
+    eyebrow="Photos"
+    title="The work matters. So do the moments around it."
+    copy="A growing record of the people, places, and small celebrations that make up life at SERA Lab."
+  />
+
+  <section class="section section--paper photos-page">
+    <div class="shell">
+      <div class="photos-page__summary">
+        <p>Life at SERA</p>
+        <p>{photos.length.toString().padStart(2, "0")} moments · Seoul, KR</p>
+      </div>
+
+      <div class="photo-journal">
+        {photos.map((photo, index) => (
+          <figure class="photo-story">
+            <div class="photo-story__image">
+              <Image src={photo.image} alt={photo.alt} widths={[480, 720, 960]} sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 33vw" loading={index === 0 ? "eager" : "lazy"} />
+            </div>
+            <figcaption>
+              <span>{(index + 1).toString().padStart(2, "0")}</span>
+              <p>{photo.label}</p>
+              <span>SERA / KU</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--fog photos-note">
+    <div class="shell photos-note__inner">
+      <p class="eyebrow">In between the research</p>
+      <p>Good systems are built by people who <em>learn, laugh, and grow together.</em></p>
+    </div>
+  </section>
+</BaseLayout>
