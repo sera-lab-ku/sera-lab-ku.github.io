@@ -12,7 +12,7 @@ export type Publication = {
 export type Person = {
   name: string;
   role: string;
-  group: "PhD" | "Undergraduate" | "Visiting";
+  group: "PhD" | "Master" | "Undergraduate" | "Visiting";
   interests: string[];
   image: string;
   email?: string;
@@ -76,17 +76,31 @@ export const people: Person[] = [
     email: "wodydy0507@korea.ac.kr"
   },
   {
-    name: "Sungwon Woo",
+    name: "Byeongjun Kwon",
     role: "Undergraduate Researcher",
     group: "Undergraduate",
+    interests: ["vLLM"],
+    image: "/assets/images/team/undergraduate_sample.png"
+  },
+  {
+    name: "Jeongsu Hwang",
+    role: "Undergraduate Researcher",
+    group: "Undergraduate",
+    interests: ["Edge NPU"],
+    image: "/assets/images/team/undergraduate_sample.png"
+  },
+  {
+    name: "Sungwon Woo",
+    role: "Master Student",
+    group: "Master",
     interests: ["Multi-agent systems", "Edge AI systems"],
     image: "/assets/images/team/swwoo_photo.JPG",
     email: "wkehdck753@naver.com"
   },
   {
     name: "Yereum Choi",
-    role: "Undergraduate Researcher",
-    group: "Undergraduate",
+    role: "Master Student",
+    group: "Master",
     interests: ["AIOps", "RL for cloud scheduling"],
     image: "/assets/images/team/yrchoi_photo.png",
     email: "yr0955@gmail.com"
