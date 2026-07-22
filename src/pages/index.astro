@@ -2,14 +2,22 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import { featuredPublications, news, researchAreas } from "../data/site";
-import campus from "../../photo/campus-hd.webp";
+import { getImage } from "astro:assets";
+import campus from "../../photo/campus_4k.jpeg";
+
+const campusBackground = await getImage({
+  src: campus,
+  width: 3840,
+  format: "webp",
+  quality: 85,
+});
 ---
 
 <BaseLayout
   title="SERA Lab. — Systems for Extended Reality and AI"
   description="SERA Lab at Korea University builds rigorous systems for extended reality and AI."
 >
-  <section class="hero hero--campus" style={`--hero-image: url(${campus.src})`}>
+  <section class="hero hero--campus" style={`--hero-image: url(${campusBackground.src})`}>
     <div class="hero__noise" aria-hidden="true"></div>
     <div class="shell hero__grid">
       <div class="hero__copy">

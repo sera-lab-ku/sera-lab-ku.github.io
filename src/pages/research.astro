@@ -2,7 +2,15 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import { researchAreas } from "../data/site";
-import campus from "../../photo/campus-hd.webp";
+import { getImage } from "astro:assets";
+import campus from "../../photo/campus_4k.jpeg";
+
+const campusBackground = await getImage({
+  src: campus,
+  width: 3840,
+  format: "webp",
+  quality: 85,
+});
 ---
 
 <BaseLayout title="Research — SERA Lab." description="Research areas at SERA Lab: extended reality, edge AI, and multi-agent systems.">
@@ -10,7 +18,7 @@ import campus from "../../photo/campus-hd.webp";
     eyebrow="Research"
     title="We design for the moment a system becomes real."
     copy="SERA studies systems that need to work under real constraints: changing networks, limited devices, demanding users, and intelligence that must earn its place."
-    backgroundImage={campus.src}
+    backgroundImage={campusBackground.src}
   />
 
   <section class="section section--paper research-detail">
