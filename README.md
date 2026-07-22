@@ -1,6 +1,7 @@
 # SERA Lab
 
 Website for the Systems for Extended Reality and AI (SERA) Lab at Korea University.
+sera-lab-ku.github.io
 
 ## Stack
 
