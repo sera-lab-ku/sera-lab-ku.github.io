@@ -2,33 +2,38 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import labLife from "../../photo/photo_0.jpg";
-import teamNight from "../../photo/photo_1.jpg";
-import campusPicnic from "../../photo/photo_2.jpg";
-import celebration from "../../photo/photo_3.jpg";
+import labLife from "../../photo/2026/photo_0.jpg";
+import teamNight from "../../photo/2026/photo_1.jpg";
+import campusPicnic from "../../photo/2026/photo_2.jpg";
+import celebration from "../../photo/2026/photo_3.jpg";
 
-const photos = [
-  {
-    image: campusPicnic,
-    alt: "SERA Lab members enjoying a picnic together on the Korea University campus",
-    label: "고려대학교 중짜 봄 피크닉"
-  },
-  {
-    image: labLife,
-    alt: "A SERA Lab member holding a laptop during a gathering in the lab",
-    label: "랩장 일상"
-  },
-  {
-    image: teamNight,
-    alt: "SERA Lab members taking a group selfie during an evening out",
-    label: "저녁 회식"
-  },
-  {
-    image: celebration,
-    alt: "SERA Lab members celebrating together with flowers and a cake",
-    label: "스승의 날, 감사합니다!"
-  }
-];
+const photoYears = [{
+  year: 2026,
+  photos: [
+    {
+      image: celebration,
+      alt: "SERA Lab members celebrating together with flowers and a cake",
+      label: "스승의 날, 감사합니다!"
+    },
+    {
+      image: campusPicnic,
+      alt: "SERA Lab members enjoying a picnic together on the Korea University campus",
+      label: "고려대학교 중짜 봄 피크닉"
+    },
+    {
+      image: labLife,
+      alt: "A SERA Lab member holding a laptop during a gathering in the lab",
+      label: "랩장 일상"
+    },
+    {
+      image: teamNight,
+      alt: "SERA Lab members taking a group selfie during an evening out",
+      label: "저녁 회식"
+    }
+  ]
+}].sort((a, b) => b.year - a.year);
+
+const photoCount = photoYears.reduce((total, group) => total + group.photos.length, 0);
 ---
 
 <BaseLayout title="Photos — SERA Lab." description="Moments from research, campus life, and the SERA Lab community at Korea University.">
@@ -42,23 +47,31 @@ const photos = [
     <div class="shell">
       <div class="photos-page__summary">
         <p>Life at SERA</p>
-        <p>{photos.length.toString().padStart(2, "0")} moments · Seoul, KR</p>
+        <p>{photoCount.toString().padStart(2, "0")} moments · Seoul, KR</p>
       </div>
 
-      <div class="photo-journal">
-        {photos.map((photo, index) => (
-          <figure class="photo-story">
-            <div class="photo-story__image">
-              <Image src={photo.image} alt={photo.alt} widths={[480, 720, 960]} sizes="(max-width: 680px) 100vw, (max-width: 900px) 50vw, 33vw" loading={index === 0 ? "eager" : "lazy"} />
-            </div>
-            <figcaption>
-              <span>{(index + 1).toString().padStart(2, "0")}</span>
-              <p>{photo.label}</p>
-              <span>SERA / KU</span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      {photoYears.map((photoYear, yearIndex) => (
+        <section class="photo-year" aria-labelledby={`photo-year-${photoYear.year}`}>
+          <div class="photo-year__heading">
+            <h2 id={`photo-year-${photoYear.year}`}>{photoYear.year}</h2>
+            <p>{photoYear.photos.length.toString().padStart(2, "0")} moments</p>
+          </div>
+          <div class="photo-journal">
+            {photoYear.photos.map((photo, index) => (
+              <figure class="photo-story">
+                <div class="photo-story__image">
+                  <Image src={photo.image} alt={photo.alt} widths={[480, 720, 960]} sizes="(max-width: 680px) 100vw, 50vw" loading={yearIndex === 0 && index === 0 ? "eager" : "lazy"} />
+                </div>
+                <figcaption>
+                  <span>{(index + 1).toString().padStart(2, "0")}</span>
+                  <p>{photo.label}</p>
+                  <span>{photoYear.year}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   </section>
 

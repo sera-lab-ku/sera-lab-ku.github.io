@@ -465,11 +465,16 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.photo-year { padding-top: clamp(3rem, 6vw, 5.5rem); }
+.photo-year + .photo-year { margin-top: clamp(4rem, 7vw, 7rem); border-top: 1px solid var(--line); }
+.photo-year__heading { display: flex; justify-content: space-between; gap: 2rem; align-items: baseline; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
+.photo-year__heading h2 { color: var(--crimson); font-family: var(--serif); font-size: clamp(3.5rem, 6vw, 6rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.85; }
+.photo-year__heading p { color: var(--ink-soft); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .photo-journal {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(2.5rem, 4vw, 4rem) clamp(1rem, 2vw, 1.5rem);
-  padding-top: clamp(3rem, 6vw, 5.5rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
 }
 .photo-story { min-width: 0; margin: 0; }
 .photo-story__image { overflow: hidden; background: var(--fog); }
