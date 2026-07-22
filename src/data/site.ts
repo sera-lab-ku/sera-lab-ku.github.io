@@ -76,6 +76,20 @@ export const people: Person[] = [
     email: "wodydy0507@korea.ac.kr"
   },
   {
+    name: "Byeongjun Kwon",
+    role: "Undergraduate Researcher",
+    group: "Undergraduate",
+    interests: ["vLLM"],
+    image: "/assets/images/team/undergraduate_sample.png"
+  },
+  {
+    name: "Jeongsu Hwang",
+    role: "Undergraduate Researcher",
+    group: "Undergraduate",
+    interests: ["Edge NPU"],
+    image: "/assets/images/team/undergraduate_sample.png"
+  },
+  {
     name: "Sungwon Woo",
     role: "Master Student",
     group: "Master",
