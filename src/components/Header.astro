@@ -1,5 +1,6 @@
 ---
 import { navigation } from "../data/site";
+import koreaUniversityLogo from "../../photo/korea_university-transparent.png";
 
 interface Props {
   currentPath: string;
@@ -12,6 +13,7 @@ const isCurrent = (href: string) => currentPath === href || (href !== "/" && cur
 <header class="site-header" data-header>
   <div class="site-header__inner shell">
     <a class="brand" href="/" aria-label="SERA Lab home">
+      <img class="brand__ku-logo" src={koreaUniversityLogo.src} alt="" aria-hidden="true" />
       <span class="brand__mark" aria-hidden="true">S</span>
       <span class="brand__type">
         <strong>SERA LAB.</strong>

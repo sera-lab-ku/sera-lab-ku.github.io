@@ -2,13 +2,15 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import { researchAreas } from "../data/site";
+import campus from "../../photo/campus-hd.webp";
 ---
 
-<BaseLayout title="Research — SERA Lab." description="Research areas at SERA Lab: extended reality, edge AI, and learning-driven infrastructure.">
+<BaseLayout title="Research — SERA Lab." description="Research areas at SERA Lab: extended reality, edge AI, and multi-agent systems.">
   <PageIntro
     eyebrow="Research"
     title="We design for the moment a system becomes real."
     copy="SERA studies systems that need to work under real constraints: changing networks, limited devices, demanding users, and intelligence that must earn its place."
+    backgroundImage={campus.src}
   />
 
   <section class="section section--paper research-detail">
@@ -33,7 +35,7 @@ import { researchAreas } from "../data/site";
     <div class="shell research-principles">
       <p class="eyebrow">How we work</p>
       <div class="research-principles__grid">
-        <p>Measure the system.<br /><em>Respect the constraint.</em></p>
+        <p>Deep dive to system.<br /><em>Find breakthrough.</em></p>
         <ul>
           <li><span>01</span> Begin from a real systems bottleneck.</li>
           <li><span>02</span> Connect algorithmic ideas to end-to-end behavior.</li>

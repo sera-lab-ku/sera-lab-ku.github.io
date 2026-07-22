@@ -3,12 +3,16 @@ interface Props {
   eyebrow: string;
   title: string;
   copy: string;
+  backgroundImage?: string;
 }
 
-const { eyebrow, title, copy } = Astro.props;
+const { eyebrow, title, copy, backgroundImage } = Astro.props;
 ---
 
-<section class="page-intro">
+<section
+  class:list={{ "page-intro": true, "page-intro--image": Boolean(backgroundImage) }}
+  style={backgroundImage ? `--page-intro-image: url(${backgroundImage})` : undefined}
+>
   <div class="shell">
     <p class="eyebrow">{eyebrow}</p>
     <h1>{title}</h1>
