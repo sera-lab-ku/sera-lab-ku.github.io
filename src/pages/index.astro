@@ -2,13 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import { featuredPublications, news, researchAreas } from "../data/site";
+import campus from "../../photo/campus.webp";
 ---
 
 <BaseLayout
   title="SERA Lab. — Systems for Extended Reality and AI"
   description="SERA Lab at Korea University builds rigorous systems for extended reality and AI."
 >
-  <section class="hero">
+  <section class="hero hero--campus" style={`--hero-image: url(${campus.src})`}>
     <div class="hero__noise" aria-hidden="true"></div>
     <div class="shell hero__grid">
       <div class="hero__copy">
@@ -23,15 +24,6 @@ import { featuredPublications, news, researchAreas } from "../data/site";
         </div>
       </div>
 
-      <div class="hero-orbit" aria-label="An abstract visualization of interconnected systems">
-        <div class="hero-orbit__halo hero-orbit__halo--outer"></div>
-        <div class="hero-orbit__halo hero-orbit__halo--inner"></div>
-        <div class="hero-orbit__node hero-orbit__node--one"><span>XR</span></div>
-        <div class="hero-orbit__node hero-orbit__node--two"><span>AI</span></div>
-        <div class="hero-orbit__node hero-orbit__node--three"><span>SYS</span></div>
-        <div class="hero-orbit__core"><span>SERA</span><small>LIVE SYSTEMS</small></div>
-        <p class="hero-orbit__caption">Research at the intersection of<br />media, intelligence, and infrastructure.</p>
-      </div>
     </div>
     <div class="shell hero__footer">
       <span>Scroll to enter</span>
