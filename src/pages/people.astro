@@ -15,7 +15,7 @@ const groupLabels = {
 <BaseLayout title="People — SERA Lab." description="Meet the researchers of SERA Lab at Korea University.">
   <PageIntro
     eyebrow="People"
-    title="A small lab with a wide systems horizon."
+    title="A lab with a wide systems horizon."
     copy="We bring different technical instincts to the same question: how can intelligent systems become more useful, responsive, and humane?"
   />
 
@@ -45,7 +45,11 @@ const groupLabels = {
                   <div class="person-card__image"><img src={person.image} alt={person.name} loading="lazy" /></div>
                   <div class="person-card__body">
                     <div><h3>{person.name}</h3><p>{person.role}</p></div>
-                    {person.email && <a href={`mailto:${person.email}`} aria-label={`Email ${person.name}`}>↗</a>}
+                    {person.email && (
+                      <a href={`mailto:${person.email}`} aria-label={`Personal site for ${person.name}`}>
+                        <span>Personal site</span><span aria-hidden="true">↗</span>
+                      </a>
+                    )}
                   </div>
                   <ul class="tag-list">{person.interests.map((interest) => <li>{interest}</li>)}</ul>
                 </article>

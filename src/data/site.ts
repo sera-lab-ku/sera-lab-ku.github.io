@@ -121,6 +121,7 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/PAVE.png",
+    link: "https://doi.org/10.1109/INFOCOM59046.2026.11571323",
     note: "Accepted"
   },
   {
@@ -129,6 +130,7 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/expresssfu.png",
+    link: "https://www.usenix.org/conference/nsdi26/presentation/tran",
     note: "Accepted"
   },
   {
@@ -137,6 +139,7 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/QCON.png",
+    link: "https://www.usenix.org/conference/nsdi26/presentation/lee",
     note: "Accepted"
   },
   {
