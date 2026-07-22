@@ -20,6 +20,7 @@
   --sans: "Plus Jakarta Sans", "IBM Plex Sans KR", Arial, sans-serif;
   --mono: "IBM Plex Mono", monospace;
   */
+  --serif-original: "DM Serif Display", Georgia, serif;
   --serif: "Source Serif 4", Georgia, serif;
   --sans: "Source Sans 3", "IBM Plex Sans KR", Arial, sans-serif;
   --mono: "IBM Plex Mono", monospace;
@@ -228,7 +229,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .hero__grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr); gap: 4rem; align-items: center; min-height: calc(min(900px, 100vh) - 6rem); padding-top: 7.25rem; padding-bottom: 5rem; }
 .hero__copy { max-width: 45rem; }
 .hero h1 { max-width: 48rem; font-size: clamp(3.2rem, 6vw, 6.5rem); font-weight: 700; letter-spacing: var(--tracking-display); line-height: 0.94; }
-.hero h1 em { color: var(--acid); font-family: var(--serif); font-weight: 400; letter-spacing: var(--tracking-display); }
+.hero h1 em { color: var(--acid); font-family: var(--serif-original); font-weight: 400; letter-spacing: var(--tracking-display); }
 .hero__lede { max-width: 36rem; margin-top: 2rem; color: rgba(255,255,255,0.74); font-size: clamp(1rem, 1.6vw, 1.22rem); line-height: 1.75; }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2.35rem; }
 .hero__footer { position: absolute; z-index: 1; bottom: 1.8rem; left: 50%; display: flex; gap: 1rem; align-items: center; color: rgba(255,255,255,0.53); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.06em; text-transform: uppercase; transform: translateX(-50%); }
@@ -315,7 +316,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 }
 .page-intro--image h1, .page-intro--image .page-intro__copy, .page-intro--image .eyebrow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.72); }
 .page-intro .eyebrow { color: var(--acid); }
-.page-intro h1 { max-width: 57rem; font-family: var(--serif); font-size: clamp(3.2rem, 7vw, 6.7rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.9; }
+.page-intro h1 { max-width: 57rem; font-family: var(--serif-original); font-size: clamp(3.2rem, 7vw, 6.7rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.9; }
 .page-intro__copy { max-width: 40rem; margin-top: 2rem; color: rgba(255,255,255,0.69); font-size: 1.05rem; line-height: 1.75; }
 
 /* Research page */
