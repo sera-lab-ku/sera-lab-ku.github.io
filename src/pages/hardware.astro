@@ -1,0 +1,77 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+import vivobook from "../../photo/hardware/asus-vivobook-s15.jpg";
+import devKit from "../../photo/hardware/open-q-8550cs-dev-kit.jpg";
+import galaxy from "../../photo/hardware/galaxy-s25.jpg";
+
+const hardware = [
+  {
+    image: galaxy,
+    name: "Samsung Galaxy S25",
+    type: "Mobile device",
+    description: "Our mobile platform for on-device experiments and real-world system evaluation.",
+    specs: ["Galaxy S25", "Android"]
+  },
+  {
+    image: devKit,
+    name: "Open-Q 8550CS SOM Development Kit",
+    type: "Edge AI development kit",
+    description:
+      "A Qualcomm Dragonwing QCS8550 platform for prototyping edge AI, camera, sensing, and connectivity workloads.",
+    specs: ["8-core CPU · up to 3.2 GHz", "16 GB LPDDR5x", "128 GB UFS", "Wi-Fi 7 · Bluetooth 5.3", "Android 13 · Yocto Linux"]
+  },
+  {
+    image: vivobook,
+    name: "ASUS Vivobook S 15",
+    type: "Laptop",
+    description: "A portable workstation for development, testing, and demonstrations.",
+    specs: ["Vivobook S 15", "Copilot+ PC"]
+  }
+];
+---
+
+<BaseLayout title="Hardware — SERA Lab." description="Hardware platforms used for systems research at SERA Lab, Korea University.">
+  <PageIntro
+    eyebrow="Hardware"
+    title="The platforms behind our experiments."
+    copy="Mobile, edge, and personal computing devices used to build and evaluate practical systems."
+  />
+
+  <section class="section section--paper hardware-page">
+    <div class="shell">
+      <div class="hardware-page__summary">
+        <p>Lab equipment</p>
+        <p>{hardware.length.toString().padStart(2, "0")} platforms · SERA / KU</p>
+      </div>
+
+      <div class="hardware-list">
+        {hardware.map((item, index) => (
+          <article class="hardware-item">
+            <div class="hardware-item__image">
+              <Image
+                src={item.image}
+                alt={`${item.name} used at SERA Lab`}
+                widths={[640, 960, 1280]}
+                sizes="(max-width: 680px) 100vw, 52vw"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
+            <div class="hardware-item__content">
+              <div class="hardware-item__index">
+                <span>{(index + 1).toString().padStart(2, "0")}</span>
+                <span>{item.type}</span>
+              </div>
+              <h2>{item.name}</h2>
+              <p>{item.description}</p>
+              <ul class="hardware-item__specs" aria-label={`${item.name} specifications`}>
+                {item.specs.map((spec) => <li>{spec}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

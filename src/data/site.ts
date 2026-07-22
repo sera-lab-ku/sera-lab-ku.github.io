@@ -23,6 +23,7 @@ export const navigation = [
   { label: "People", href: "/people/" },
   { label: "Publications", href: "/publications/" },
   { label: "Join us", href: "/join/" },
+  { label: "Hardware", href: "/hardware/" },
   { label: "Photos", href: "/photos/" }
 ];
 
