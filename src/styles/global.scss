@@ -312,11 +312,54 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .research-detail__visual span:nth-child(1) { inset: 12%; }
 .research-detail__visual span:nth-child(2) { inset: 29%; border-color: var(--acid); }
 .research-detail__visual span:nth-child(3) { top: 47%; left: 47%; width: 0.45rem; height: 0.45rem; border: 0; background: var(--crimson-bright); }
-.research-detail__visual--2 { border-radius: 0; background: var(--crimson); }
-.research-detail__visual--2 span { border-radius: 0; transform: rotate(45deg); }
-.research-detail__visual--3 { background: var(--acid); }
-.research-detail__visual--3 span { border-color: var(--ink); }
-.research-detail__visual--3 span:nth-child(3) { background: var(--crimson); }
+.research-detail__visual--2 {
+  border-radius: 0.75rem;
+  background-color: var(--crimson);
+  background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+}
+.research-detail__visual--2::before {
+  position: absolute;
+  z-index: 2;
+  inset: 24%;
+  display: grid;
+  content: "NPU";
+  place-items: center;
+  border: 1px solid var(--acid);
+  border-radius: 0.45rem;
+  color: var(--acid);
+  background: var(--ink);
+  box-shadow: 0 0 0 0.55rem rgba(17, 24, 32, 0.18);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+.research-detail__visual--2::after { position: absolute; inset: 11%; content: ""; border: 1px dashed rgba(255,255,255,0.48); border-radius: 0.5rem; }
+.research-detail__visual--2 span { display: none; }
+.research-detail__visual--3 {
+  border-radius: 0.75rem;
+  background-color: var(--ink);
+  background-image: linear-gradient(31deg, transparent 49.5%, rgba(217,230,91,0.48) 50%, transparent 50.5%), linear-gradient(-31deg, transparent 49.5%, rgba(217,230,91,0.48) 50%, transparent 50.5%);
+}
+.research-detail__visual--3 span {
+  z-index: 1;
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 1px solid var(--acid);
+  border-radius: 50%;
+  color: var(--ink);
+  background: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+}
+.research-detail__visual--3 span::before { content: "A1"; }
+.research-detail__visual--3 span:nth-child(1) { inset: 12% auto auto 50%; transform: translateX(-50%); }
+.research-detail__visual--3 span:nth-child(2) { inset: auto auto 12% 12%; border-color: var(--paper-white); color: var(--paper-white); background: var(--crimson); }
+.research-detail__visual--3 span:nth-child(2)::before { content: "A2"; }
+.research-detail__visual--3 span:nth-child(3) { inset: auto 12% 12% auto; width: 2.65rem; height: 2.65rem; border-color: var(--paper-white); color: var(--paper-white); background: var(--crimson); }
+.research-detail__visual--3 span:nth-child(3)::before { content: "A3"; }
 .research-principles > .eyebrow { margin-bottom: 2.3rem; }
 .research-principles__grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(19rem, 0.65fr); gap: 6rem; }
 .research-principles__grid > p { max-width: 38rem; font-family: var(--serif); font-size: clamp(2.4rem, 4.1vw, 4.2rem); letter-spacing: -0.06em; line-height: 1; }

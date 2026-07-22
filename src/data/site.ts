@@ -43,10 +43,10 @@ export const researchAreas = [
   },
   {
     index: "03",
-    title: "Learning-Driven Infrastructure",
+    title: "Multi-Agent Systems",
     description:
-      "Data-driven control for cloud, mobile, and networked systems where performance, cost, and reliability meet.",
-    tags: ["AIOps", "Scheduling", "Networked systems"]
+      "We design collaborative AI agents that reason, coordinate, and act together to solve complex tasks across real systems.",
+    tags: ["Multi-agent systems", "Agentic AI", "Distributed coordination"]
   }
 ];
 
