@@ -286,7 +286,14 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .join-banner h2 { font-family: var(--serif); font-size: clamp(1.65rem, 3vw, 2.6rem); font-weight: 400; letter-spacing: -0.04em; }
 
 /* Page intros */
-.page-intro { padding: clamp(11rem, 18vw, 14.5rem) 0 clamp(4.5rem, 9vw, 7rem); color: var(--paper-white); background: var(--ink); }
+.page-intro {
+  padding: clamp(11rem, 18vw, 14.5rem) 0 clamp(4.5rem, 9vw, 7rem);
+  color: var(--paper-white);
+  background:
+    radial-gradient(circle at 82% 22%, rgba(185, 31, 70, 0.58), transparent 31%),
+    radial-gradient(circle at 12% 100%, rgba(68, 96, 126, 0.48), transparent 38%),
+    linear-gradient(120deg, #0c141d 0%, #17283a 54%, #351725 100%);
+}
 .page-intro--image {
   background-color: transparent;
   background-image: var(--page-intro-image);
