@@ -299,6 +299,20 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .join-banner h2 { font-family: var(--serif); font-size: clamp(1.65rem, 3vw, 2.6rem); font-weight: 400; letter-spacing: var(--tracking-display); }
 
 /* Page intros */
+.page-nav-band {
+  height: 5.8rem;
+  background: linear-gradient(120deg, #0c141d 0%, #17283a 54%, #351725 100%);
+}
+.content-divider {
+  display: grid;
+  grid-template-columns: minmax(2rem, 1fr) auto minmax(2rem, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+.content-divider::before, .content-divider::after { height: 1px; content: ""; background: var(--line); }
+.content-divider h1 { font-family: var(--serif-original); font-size: clamp(2.4rem, 4vw, 3.8rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.9; }
+.content-divider--wide h1 { max-width: 47rem; font-size: clamp(2.15rem, 3.6vw, 3.35rem); line-height: 0.98; text-align: center; }
 .page-intro {
   padding: clamp(11rem, 18vw, 14.5rem) 0 clamp(4.5rem, 9vw, 7rem);
   color: var(--paper-white);
@@ -388,6 +402,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .research-principles li span { color: var(--crimson); font-family: var(--mono); font-size: 0.65rem; }
 
 /* People */
+.people-page { padding-top: clamp(3rem, 5vw, 4.5rem); }
 .faculty-card { display: grid; grid-template-columns: minmax(15rem, 0.55fr) minmax(0, 1fr) 7rem; gap: clamp(1.5rem, 4vw, 4rem); align-items: stretch; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--line); background: var(--paper-white); }
 .faculty-card__portrait { min-height: 25rem; overflow: hidden; background: var(--fog); }
 .faculty-card__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
@@ -421,7 +436,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .recruitment-strip p { font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 2.2rem); letter-spacing: var(--tracking-display); }
 
 /* Publications */
-.publications-page { padding-top: 0; }
+.publications-page { padding-top: clamp(3rem, 5vw, 4.5rem); }
 .publications-page__summary { display: flex; justify-content: space-between; padding: 1rem 0 1.2rem; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .publication-year { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 1.5rem; padding: clamp(3rem, 5vw, 4.8rem) 0; border-bottom: 1px solid var(--line); }
 .publication-year > h2 { color: var(--crimson); font-family: var(--serif); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.8; }
@@ -453,18 +468,8 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .application-flow__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 /* Photos */
-.photos-page { padding-top: 0; }
-.photos-page__summary {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0 1.2rem;
-  border-bottom: 1px solid var(--line);
-  color: var(--ink-soft);
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+.photos-page { padding-top: clamp(3rem, 5vw, 4.5rem); }
+.photos-page .content-divider { margin-bottom: 0; }
 .photo-year { padding-top: clamp(3rem, 6vw, 5.5rem); }
 .photo-year + .photo-year { margin-top: clamp(4rem, 7vw, 7rem); border-top: 1px solid var(--line); }
 .photo-year__heading { display: flex; justify-content: space-between; gap: 2rem; align-items: baseline; padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
@@ -629,6 +634,9 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 }
 
 @media (max-width: 680px) {
+  .page-nav-band { height: 5rem; }
+  .content-divider { grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+  .content-divider h1 { font-size: 2.35rem; }
   .site-header__inner { min-height: 5rem; }
   .brand__ku-logo { height: 2.7rem; }
   .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 0.75rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; background: var(--ink); transform: translateY(-0.8rem); transition: opacity 180ms ease, transform 180ms ease; }
@@ -680,9 +688,6 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .publication-row__image { width: 4.4rem; }
   .publication-row__content > p { font-size: 0.66rem; }
   .contact-card { min-height: 13rem; }
-  .photos-page__summary { gap: 1rem; }
-  .photos-page__summary p { min-width: 0; }
-  .photos-page__summary p:last-child { max-width: 9rem; text-align: right; }
   .photo-journal { grid-template-columns: 1fr; gap: 3.5rem; padding-top: 3rem; }
   .photo-story figcaption { grid-template-columns: 2rem minmax(0, 1fr); }
   .photos-note__inner { grid-template-columns: 1fr; gap: 1.5rem; }

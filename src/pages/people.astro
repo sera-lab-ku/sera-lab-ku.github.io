@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageIntro from "../components/PageIntro.astro";
 import { people } from "../data/site";
 
 const groups = ["PhD", "Master", "Undergraduate", "Visiting"] as const;
@@ -13,13 +12,10 @@ const groupLabels = {
 ---
 
 <BaseLayout title="People — SERA Lab." description="Meet the researchers of SERA Lab at Korea University.">
-  <PageIntro
-    eyebrow="People"
-    title="A lab with a wide systems horizon."
-    copy="We bring different technical instincts to the same question: how can intelligent systems become more useful, responsive, and humane?"
-  />
+  <div class="page-nav-band" aria-hidden="true"></div>
 
-  <section class="section section--paper">
+  <section class="section section--paper people-page">
+    <header class="shell content-divider"><h1>Members</h1></header>
     <div class="shell faculty-card">
       <div class="faculty-card__portrait"><img src="/assets/images/about/seyeonkim.jpg" alt="Professor Seyeon Kim" /></div>
       <div class="faculty-card__content">
