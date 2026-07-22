@@ -22,7 +22,8 @@ export const navigation = [
   { label: "Research", href: "/research/" },
   { label: "People", href: "/people/" },
   { label: "Publications", href: "/publications/" },
-  { label: "Join us", href: "/join/" }
+  { label: "Join us", href: "/join/" },
+  { label: "Photos", href: "/photos/" }
 ];
 
 export const researchAreas = [
