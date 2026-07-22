@@ -3,8 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import { people } from "../data/site";
 
-const groups = ["PhD", "Undergraduate", "Visiting"] as const;
-const groupLabels = { PhD: "Ph.D. Students", Undergraduate: "Undergraduate Researchers", Visiting: "Visiting Researchers" };
+const groups = ["PhD", "Master", "Undergraduate", "Visiting"] as const;
+const groupLabels = {
+  PhD: "Ph.D. Students",
+  Master: "Master Students",
+  Undergraduate: "Undergraduate Researchers",
+  Visiting: "Visiting Researchers"
+};
 ---
 
 <BaseLayout title="People — SERA Lab." description="Meet the researchers of SERA Lab at Korea University.">
@@ -33,7 +38,7 @@ const groupLabels = { PhD: "Ph.D. Students", Undergraduate: "Undergraduate Resea
         const members = people.filter((person) => person.group === group);
         return (
           <div class="people-group">
-            <div class="people-group__heading"><p class="eyebrow">{group === "PhD" ? "01" : group === "Undergraduate" ? "02" : "03"}</p><h2>{groupLabels[group]}</h2><span>{members.length.toString().padStart(2, "0")}</span></div>
+            <div class="people-group__heading"><p class="eyebrow">{(groups.indexOf(group) + 1).toString().padStart(2, "0")}</p><h2>{groupLabels[group]}</h2><span>{members.length.toString().padStart(2, "0")}</span></div>
             <div class="people-grid">
               {members.map((person) => (
                 <article class="person-card">
