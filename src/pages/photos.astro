@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageIntro from "../components/PageIntro.astro";
 import labLife from "../../photo/2026/photo_0.jpg";
 import teamNight from "../../photo/2026/photo_1.jpg";
 import campusPicnic from "../../photo/2026/photo_2.jpg";
@@ -33,22 +32,14 @@ const photoYears = [{
   ]
 }].sort((a, b) => b.year - a.year);
 
-const photoCount = photoYears.reduce((total, group) => total + group.photos.length, 0);
 ---
 
 <BaseLayout title="Photos — SERA Lab." description="Moments from research, campus life, and the SERA Lab community at Korea University.">
-  <PageIntro
-    eyebrow="Photos"
-    title="The work matters. So do the moments around it."
-    copy="A growing record of the people, places, and small celebrations that make up life at SERA Lab."
-  />
+  <div class="page-nav-band" aria-hidden="true"></div>
 
   <section class="section section--paper photos-page">
     <div class="shell">
-      <div class="photos-page__summary">
-        <p>Life at SERA</p>
-        <p>{photoCount.toString().padStart(2, "0")} moments · Seoul, KR</p>
-      </div>
+      <header class="content-divider content-divider--wide"><h1>The work matters.<br />So do the moments around it.</h1></header>
 
       {photoYears.map((photoYear, yearIndex) => (
         <section class="photo-year" aria-labelledby={`photo-year-${photoYear.year}`}>

@@ -1,20 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PageIntro from "../components/PageIntro.astro";
 import { publications } from "../data/site";
 
 const years = [...new Set(publications.map((publication) => publication.year))];
 ---
 
 <BaseLayout title="Publications — SERA Lab." description="Publications from SERA Lab at Korea University.">
-  <PageIntro
-    eyebrow="Publications"
-    title="Ideas, tested in the systems that matter."
-    copy="Our publications span real-time media, mobile and edge intelligence, cloud systems, and the networked infrastructure that holds them together."
-  />
+  <div class="page-nav-band" aria-hidden="true"></div>
 
   <section class="section section--paper publications-page">
     <div class="shell">
+      <header class="content-divider"><h1>Publication</h1></header>
       <div class="publications-page__summary"><span>{publications.length} selected publications</span><span>2021 — 2026</span></div>
       {years.map((year) => (
         <section class="publication-year" aria-labelledby={`year-${year}`}>
