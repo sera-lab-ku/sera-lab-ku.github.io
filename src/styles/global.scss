@@ -178,7 +178,7 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
 .brand__type strong { font-size: 0.78rem; letter-spacing: 0.08em; }
 .brand__type small { color: rgba(255,255,255,0.66); font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.06em; }
 .site-nav { display: flex; gap: clamp(1.1rem, 2vw, 2.1rem); align-items: center; }
-.site-nav__link, .site-nav__contact { position: relative; font-size: 0.74rem; font-weight: 700; }
+.site-nav__link, .site-nav__contact { position: relative; font-size: 1.11rem; font-weight: 700; }
 .site-nav__link::after {
   position: absolute;
   right: 0;
@@ -220,15 +220,19 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
   background: radial-gradient(circle at 76% 30%, rgba(185,31,70,0.58), transparent 28%), radial-gradient(circle at 83% 79%, rgba(217,230,91,0.22), transparent 19%);
 }
 .hero--campus {
-  min-height: min(900px, 66.666vw);
+  min-height: min(450px, 33.333vw);
   background-color: transparent;
   background-image: var(--hero-image);
-  background-position: center top;
+  background-position: center 38%;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
 }
 .hero--campus::before, .hero--campus .hero__noise { display: none; }
-.hero--campus .hero__grid { min-height: min(900px, 66.666vw); grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.65fr); }
+.hero--campus .hero__grid { min-height: min(450px, 33.333vw); grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 0.65fr); padding-top: 6.5rem; padding-bottom: 2.25rem; }
+.hero--campus .hero__copy h1 { font-size: clamp(2.1rem, 3.6vw, 3.9rem); }
+.hero--campus .hero__lede { max-width: 32rem; margin-top: 1.15rem; font-size: clamp(0.88rem, 1.1vw, 1rem); line-height: 1.65; }
+.hero--campus .hero__actions { margin-top: 1.4rem; }
+.hero--campus .hero__footer { bottom: 1.05rem; }
 .hero--campus .hero__copy { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.66); }
 .hero--campus .button { text-shadow: none; }
 body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.48); }
@@ -267,6 +271,11 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .research-card__top { display: flex; justify-content: space-between; color: var(--crimson); font-family: var(--mono); font-size: 0.64rem; }
 .research-card:hover .research-card__top { color: var(--acid); }
 .research-card__arrow { font-size: 1rem; }
+.research-card__glyph { display: grid; margin: 1.35rem 0 0.35rem; place-items: center; }
+.research-card__glyph svg { width: 100%; max-width: 13.5rem; height: auto; color: var(--ink); transition: color 250ms var(--ease); }
+.research-card:hover .research-card__glyph svg { color: var(--paper-white); }
+.research-card { --glyph-accent: var(--crimson); }
+.research-card:hover { --glyph-accent: var(--acid); }
 .research-card h3 { max-width: 16rem; margin-top: auto; font-size: clamp(1.4rem, 2.1vw, 2rem); letter-spacing: var(--tracking-heading); line-height: 1.1; }
 .research-card p { margin: 1rem 0 1.5rem; color: var(--ink-soft); font-size: 0.84rem; line-height: 1.7; }
 .research-card:hover p { color: rgba(255,255,255,0.73); }
@@ -642,10 +651,21 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 
 @media (max-width: 900px) {
   .shell { width: min(100% - 2.5rem, 1180px); }
+  /* The enlarged nav type no longer fits beside the brand below this width,
+     so the links collapse into the toggle menu here rather than at 680px. */
+  .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 0.75rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; background: var(--ink); transform: translateY(-0.8rem); transition: opacity 180ms ease, transform 180ms ease; }
+  .site-header.is-menu-open .site-nav { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .site-nav__link { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 1.35rem; }
+  .site-nav__link::after { display: none; }
+  .site-nav__contact { width: max-content; margin-top: 1rem; }
+  .menu-toggle { display: grid; width: 2.3rem; gap: 0.36rem; padding: 0.6rem; }
+  .menu-toggle span { display: block; height: 1px; background: currentColor; transition: transform 180ms ease; }
+  .site-header.is-menu-open .menu-toggle span:first-child { transform: translateY(0.18rem) rotate(45deg); }
+  .site-header.is-menu-open .menu-toggle span:last-child { transform: translateY(-0.18rem) rotate(-45deg); }
   .hero { min-height: auto; }
   .hero--campus { min-height: auto; }
   .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; padding-top: 10rem; padding-bottom: 7rem; }
-  .hero--campus .hero__grid { grid-template-columns: minmax(0, 0.78fr) minmax(10rem, 0.22fr); }
+  .hero--campus .hero__grid { grid-template-columns: minmax(0, 0.78fr) minmax(10rem, 0.22fr); padding-top: 6.75rem; padding-bottom: 3.25rem; }
   .hero-orbit { width: min(82vw, 29rem); justify-self: center; }
   .hero__footer { position: static; width: min(100% - 2.5rem, 1180px); margin: -3.6rem auto 1.3rem; transform: none; }
   .section-heading, .feature-band__grid, .research-principles__grid, .join-page__grid, .application-flow__grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -670,21 +690,14 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .content-divider h1 { font-size: 2.35rem; }
   .site-header__inner { min-height: 5rem; }
   .brand__ku-logo { height: 2.7rem; }
-  .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 0.75rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; background: var(--ink); transform: translateY(-0.8rem); transition: opacity 180ms ease, transform 180ms ease; }
-  .site-header.is-menu-open .site-nav { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .site-nav__link { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.9rem; }
-  .site-nav__link::after { display: none; }
-  .site-nav__contact { width: max-content; margin-top: 1rem; }
-  .menu-toggle { display: grid; width: 2.3rem; gap: 0.36rem; padding: 0.6rem; }
-  .menu-toggle span { display: block; height: 1px; background: currentColor; transition: transform 180ms ease; }
-  .site-header.is-menu-open .menu-toggle span:first-child { transform: translateY(0.18rem) rotate(45deg); }
-  .site-header.is-menu-open .menu-toggle span:last-child { transform: translateY(-0.18rem) rotate(-45deg); }
   .hero__grid { padding-top: 8.4rem; }
   .hero--campus { background-position: 58% center; }
   .hero--campus, .page-intro--image { background-position: center; background-size: auto 100%; }
-  .hero--campus .hero__grid { grid-template-columns: 1fr; }
+  .hero--campus .hero__grid { grid-template-columns: 1fr; padding-top: 6.25rem; padding-bottom: 2.75rem; }
   .hero h1 { font-size: clamp(3.05rem, 14.5vw, 4.85rem); }
+  .hero--campus .hero__copy h1 { font-size: clamp(1.95rem, 8.4vw, 2.9rem); }
   .hero__lede { font-size: 0.95rem; }
+  .hero--campus .hero__lede { font-size: 0.88rem; }
   .hero__footer { display: none; }
   .hero-orbit { width: min(88vw, 23rem); }
   .hero-orbit__caption { right: -0.25rem; }
