@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import ResearchGlyph from "../components/ResearchGlyph.astro";
 import { featuredPublications, news, researchAreas, splitNewsTitle } from "../data/site";
 import { getImage } from "astro:assets";
 import campus from "../../photo/campus_4k.jpeg";
@@ -52,6 +53,7 @@ const campusBackground = await getImage({
         {researchAreas.map((area) => (
           <article class="research-card">
             <div class="research-card__top"><span>{area.index}</span><span class="research-card__arrow">↗</span></div>
+            <ResearchGlyph index={area.index} />
             <h3>{area.title}</h3>
             <p>{area.description}</p>
             <ul class="tag-list">

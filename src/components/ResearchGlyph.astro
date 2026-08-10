@@ -1,0 +1,82 @@
+---
+/**
+ * Abstract line glyph for each research-focus card.
+ *
+ * Strokes use `currentColor` and accents use `--glyph-accent` so the artwork
+ * inverts together with the card when it flips to the crimson hover state.
+ */
+interface Props {
+  index: string;
+}
+
+const { index } = Astro.props;
+---
+
+<div class="research-card__glyph" aria-hidden="true">
+  {index === "01" && (
+    <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linejoin="round">
+      {/* Capture volume, drawn as a transparent isometric wireframe. */}
+      <path d="M80 10 128 34 80 58 32 34Z" opacity="0.9" />
+      <path d="M32 34v30l48 24V58" opacity="0.6" />
+      <path d="M128 34v30L80 88" opacity="0.4" />
+      {/* Rear edges, kept faint so the volume reads as see-through. */}
+      <g opacity="0.22" stroke-dasharray="2.5 3.5">
+        <path d="M80 10v30M80 40 32 64M80 40 128 64" />
+      </g>
+      {/* Points sampled through the volume. */}
+      <g stroke="none" fill="currentColor">
+        <circle cx="66" cy="36" r="1.7" opacity="0.7" />
+        <circle cx="95" cy="33" r="1.7" opacity="0.5" />
+        <circle cx="80" cy="47" r="1.7" opacity="0.8" />
+        <circle cx="59" cy="51" r="1.7" opacity="0.4" />
+        <circle cx="101" cy="49" r="1.7" opacity="0.55" />
+        <circle cx="75" cy="62" r="1.7" opacity="0.45" />
+      </g>
+      {/* Viewer and sight line into the volume. */}
+      <circle cx="16" cy="77" r="5" stroke="var(--glyph-accent)" />
+      <path d="M21 74 52 57" stroke="var(--glyph-accent)" stroke-dasharray="3 4" opacity="0.85" />
+      <g stroke="none" fill="var(--glyph-accent)">
+        <circle cx="80" cy="10" r="2.6" />
+      </g>
+    </svg>
+  )}
+
+  {index === "02" && (
+    <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round">
+      {/* Accelerator package with its die exposed. */}
+      <rect x="46" y="24" width="68" height="52" rx="4" opacity="0.9" />
+      <rect x="62" y="38" width="36" height="24" rx="2" stroke="var(--glyph-accent)" />
+      <path d="M70 46h20M70 54h20" stroke="var(--glyph-accent)" opacity="0.65" />
+      {/* Package pins reaching the rest of the device. */}
+      <g opacity="0.5">
+        <path d="M62 24v-9M80 24v-9M98 24v-9M62 76v9M80 76v9M98 76v9" />
+        <path d="M46 38h-11M46 50h-11M46 62h-11M114 38h11M114 50h11M114 62h11" />
+      </g>
+      {/* Workload arriving at the edge. */}
+      <g stroke="none" fill="var(--glyph-accent)">
+        <circle cx="24" cy="50" r="2.6" />
+        <circle cx="136" cy="50" r="2.6" />
+      </g>
+    </svg>
+  )}
+
+  {index === "03" && (
+    <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round">
+      {/* Agents coordinating over a shared task. */}
+      <path d="M53 34 107 38M50 43 74 70M110 47 88 70" opacity="0.5" stroke-dasharray="3 4" />
+      <circle cx="46" cy="28" r="10" opacity="0.9" />
+      <circle cx="114" cy="32" r="10" opacity="0.9" />
+      <circle cx="81" cy="76" r="10" stroke="var(--glyph-accent)" />
+      <g stroke="none" fill="currentColor" opacity="0.6">
+        <circle cx="46" cy="28" r="2.4" />
+        <circle cx="114" cy="32" r="2.4" />
+      </g>
+      <g stroke="none" fill="var(--glyph-accent)">
+        <circle cx="81" cy="76" r="2.8" />
+      </g>
+      {/* Direction of exchange. */}
+      <path d="M99 36.5 107 38l-6 5" opacity="0.55" />
+      <path d="M67 63 74 70l-9 1.5" opacity="0.55" />
+    </svg>
+  )}
+</div>
