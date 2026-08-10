@@ -93,7 +93,7 @@ const campusBackground = await getImage({
               <span>{paper.year}</span>
             </div>
             <div class="featured-paper__content">
-              <p class="publication-meta" data-pub-type={paper.type.toLowerCase()}>{paper.venue} · {paper.type}</p>
+              <p class="publication-meta" data-pub-type={paper.type.toLowerCase()}><span class="pub-tag pub-tag--type">{paper.type}</span><span class="pub-tag pub-tag--venue">{paper.venue}</span></p>
               <h3>{paper.title}</h3>
               {paper.note && <span class="status-pill">{paper.note}</span>}
               {paper.link ? (

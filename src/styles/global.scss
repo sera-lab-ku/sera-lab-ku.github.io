@@ -132,6 +132,7 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
   display: inline-flex;
   width: max-content;
   padding: 0.27rem 0.45rem;
+  border: 1px solid transparent;
   border-radius: 999px;
   color: var(--ink);
   background: var(--acid);
@@ -284,7 +285,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .featured-paper:hover img { transform: scale(1.05); }
 .featured-paper__image-wrap span { position: absolute; top: 0.7rem; left: 0.7rem; padding: 0.25rem 0.4rem; color: var(--paper-white); background: var(--ink); font-family: var(--mono); font-size: 0.59rem; }
 .featured-paper__content { display: flex; flex-direction: column; align-items: flex-start; }
-.publication-meta { color: var(--venue-conference); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.03em; text-transform: uppercase; }
+.publication-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; color: var(--venue-conference); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.03em; text-transform: uppercase; }
 .featured-paper h3 { margin-top: 0.7rem; font-size: 1.04rem; letter-spacing: var(--tracking-heading); line-height: 1.33; }
 .featured-paper .status-pill, .featured-paper .forthcoming { margin-top: 0.85rem; }
 .featured-paper .text-link, .featured-paper .forthcoming { margin-top: auto; }
@@ -451,13 +452,30 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .publication-row { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr) 2.8rem; gap: 1.1rem; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--line); }
 .publication-row__image { width: 5.2rem; aspect-ratio: 1; overflow: hidden; background: var(--fog); }
 .publication-row__image img { width: 100%; height: 100%; object-fit: cover; }
-.publication-row__meta { display: flex; flex-wrap: wrap; gap: 0.45rem 0.7rem; align-items: center; color: var(--venue-conference); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.publication-row__meta { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; color: var(--venue-conference); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.04em; text-transform: uppercase; }
 
 /* Publication type colour coding (the type word itself is always spelled out,
    so colour stays a secondary cue rather than the only one). */
-.publication-meta[data-pub-type="journal"], .publication-row__meta[data-pub-type="journal"] { color: var(--venue-journal); }
-.publication-meta[data-pub-type="workshop"], .publication-row__meta[data-pub-type="workshop"] { color: var(--venue-workshop); }
-.publication-meta[data-pub-type="magazine"], .publication-row__meta[data-pub-type="magazine"] { color: var(--venue-magazine); }
+/* Type and venue chips. The type word is spelled out inside the chip, so
+   colour stays a secondary cue rather than the only one. Filled chip for the
+   type, outlined chip in the same hue for the venue. */
+.pub-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.27rem 0.45rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.pub-tag--type { color: var(--paper-white); background: var(--venue-conference); }
+.pub-tag--venue { color: var(--venue-conference); border-color: currentColor; }
+[data-pub-type="journal"] .pub-tag--type { background: var(--venue-journal); }
+[data-pub-type="journal"] .pub-tag--venue { color: var(--venue-journal); }
+[data-pub-type="workshop"] .pub-tag--type { background: var(--venue-workshop); }
+[data-pub-type="workshop"] .pub-tag--venue { color: var(--venue-workshop); }
+[data-pub-type="magazine"] .pub-tag--type { background: var(--venue-magazine); }
+[data-pub-type="magazine"] .pub-tag--venue { color: var(--venue-magazine); }
 .publication-row__content h3 { margin-top: 0.44rem; font-size: clamp(0.98rem, 1.5vw, 1.15rem); letter-spacing: var(--tracking-heading); line-height: 1.35; }
 .publication-row__content > p { margin-top: 0.38rem; color: var(--ink-soft); font-size: 0.71rem; line-height: 1.55; }
 .publication-row__link { display: grid; width: 2.2rem; height: 2.2rem; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-size: 1rem; transition: color 180ms var(--ease), background 180ms var(--ease), transform 180ms var(--ease); }
