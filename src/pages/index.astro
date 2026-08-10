@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
-import { featuredPublications, news, researchAreas } from "../data/site";
+import { featuredPublications, news, researchAreas, splitNewsTitle } from "../data/site";
 import { getImage } from "astro:assets";
 import campus from "../../photo/campus_4k.jpeg";
 
@@ -89,7 +89,7 @@ const campusBackground = await getImage({
         {featuredPublications.map((paper, index) => (
           <article class={`featured-paper featured-paper--${index + 1}`}>
             <div class="featured-paper__image-wrap">
-              <img src={paper.image} alt="" loading="lazy" />
+              {paper.image && <img src={paper.image} alt="" loading="lazy" />}
               <span>{paper.year}</span>
             </div>
             <div class="featured-paper__content">
@@ -120,7 +120,9 @@ const campusBackground = await getImage({
           <article class="news-item">
             <span class="news-item__date">{item.date}</span>
             <span class="news-item__label">{item.label}</span>
-            <h3>{item.title}</h3>
+            <h3>{splitNewsTitle(item).map((segment) => (
+              segment.venue ? <span class="news-item__venue">{segment.text}</span> : segment.text
+            ))}</h3>
             <span class="news-item__arrow" aria-hidden="true">↗</span>
           </article>
         ))}

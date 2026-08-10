@@ -4,9 +4,17 @@ export type Publication = {
   venue: string;
   year: number;
   type: "Conference" | "Journal" | "Workshop" | "Magazine";
-  image: string;
+  image?: string;
   link?: string;
   note?: string;
+};
+
+export type NewsItem = {
+  date: string;
+  label: string;
+  title: string;
+  /** Substrings of `title` rendered in the accent colour (venues, awards). */
+  venues?: string[];
 };
 
 export type Person = {
@@ -51,14 +59,28 @@ export const researchAreas = [
   }
 ];
 
-export const news = [
-  { date: "2026.08", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026." },
+export const news: NewsItem[] = [
+  { date: "2026.08", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
   { date: "2026.08", label: "Community", title: "Two research interns joined the lab." },
-  { date: "2026.03", label: "Recognition", title: "A new paper was accepted to IEEE SECON 2026." },
+  { date: "2026.03", label: "Recognition", title: "A new paper was accepted to IEEE SECON 2026.", venues: ["IEEE SECON 2026"] },
   { date: "2026.01", label: "Community", title: "Two research interns joined the lab." },
-  { date: "2026.01", label: "Award", title: "Goodsol received a Gold Award at Samsung HumanTech Paper Awards 2026." },
-  { date: "2025.07", label: "Publication", title: "New papers were accepted to INFOCOM 2026 and NSDI 2026." }
+  { date: "2026.01", label: "Award", title: "Goodsol received a Gold Award at Samsung HumanTech Paper Awards 2026.", venues: ["Samsung HumanTech Paper Awards 2026"] },
+  { date: "2025.07", label: "Publication", title: "New papers were accepted to INFOCOM 2026 and NSDI 2026.", venues: ["INFOCOM 2026", "NSDI 2026"] }
 ];
+
+/**
+ * Splits a news title into plain and accented segments so venue names can be
+ * highlighted without embedding markup in the data.
+ */
+export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean }[] {
+  const venues = item.venues ?? [];
+  if (venues.length === 0) return [{ text: item.title, venue: false }];
+  const pattern = venues.map((venue) => venue.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  return item.title
+    .split(new RegExp(`(${pattern})`))
+    .filter((segment) => segment.length > 0)
+    .map((segment) => ({ text: segment, venue: venues.includes(segment) }));
+}
 
 export const people: Person[] = [
   {
@@ -131,8 +153,7 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/PAVE.png",
-    link: "https://doi.org/10.1109/INFOCOM59046.2026.11571323",
-    note: "Accepted"
+    link: "https://doi.org/10.1109/INFOCOM59046.2026.11571323"
   },
   {
     title: "eXpressSFU: Toward Super-Scalable Video Conferencing with SmartNICs",
@@ -140,8 +161,7 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/expresssfu.png",
-    link: "https://www.usenix.org/conference/nsdi26/presentation/tran",
-    note: "Accepted"
+    link: "https://www.usenix.org/conference/nsdi26/presentation/tran"
   },
   {
     title: "QCON: Seamless QoE-Aware 5G Streaming via Multi-Connectivity",
@@ -149,8 +169,15 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/QCON.png",
-    link: "https://www.usenix.org/conference/nsdi26/presentation/lee",
-    note: "Accepted"
+    link: "https://www.usenix.org/conference/nsdi26/presentation/lee"
+  },
+  {
+    title: "DualEngine: A Thermal-Aware Vision Inference Framework via Mobile and Cloud Co-Execution",
+    authors: "Pyeongjun Choi, Jeongsoo Kim, Seyeon Kim, Jeongho Kwak",
+    venue: "IEEE SECON",
+    year: 2026,
+    type: "Conference",
+    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11579018"
   },
   {
     title: "DeltaStream: 2D-Inferred Delta Encoding for Live Volumetric Video Streaming",
