@@ -144,8 +144,7 @@ export const publications: Publication[] = [
     venue: "ACM SIGCOMM",
     year: 2026,
     type: "Conference",
-    image: "/assets/images/publications/deepsfu.png",
-    note: "Accepted"
+    image: "/assets/images/publications/deepsfu.png"
   },
   {
     title: "PAVE: Mitigating Non-Congestive Delay for Seamless Video Calls over NextG Mobile Networks",
