@@ -20,7 +20,7 @@ const years = [...new Set(publications.map((publication) => publication.year))];
               <article class="publication-row">
                 <div class="publication-row__image">{paper.image && <img src={paper.image} alt="" loading="lazy" />}</div>
                 <div class="publication-row__content">
-                  <div class="publication-row__meta" data-pub-type={paper.type.toLowerCase()}><span>{paper.type}</span><span>{paper.venue}</span>{paper.note && <span class="status-pill">{paper.note}</span>}</div>
+                  <div class="publication-row__meta" data-pub-type={paper.type.toLowerCase()}><span class="pub-tag pub-tag--type">{paper.type}</span><span class="pub-tag pub-tag--venue">{paper.venue}</span>{paper.note && <span class="status-pill">{paper.note}</span>}</div>
                   <h3>{paper.title}</h3>
                   {paper.authors && <p>{paper.authors}</p>}
                 </div>
