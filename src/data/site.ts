@@ -52,6 +52,8 @@ export const researchAreas = [
 ];
 
 export const news = [
+  { date: "2026.08", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026." },
+  { date: "2026.08", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.03", label: "Recognition", title: "A new paper was accepted to IEEE SECON 2026." },
   { date: "2026.01", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.01", label: "Award", title: "Goodsol received a Gold Award at Samsung HumanTech Paper Awards 2026." },
@@ -115,6 +117,14 @@ export const people: Person[] = [
 ];
 
 export const publications: Publication[] = [
+  {
+    title: "DeepSFU: Scalable Deepfake Detection for Video Conferencing",
+    venue: "ACM SIGCOMM",
+    year: 2026,
+    type: "Conference",
+    image: "/assets/images/publications/deepsfu.png",
+    note: "Accepted"
+  },
   {
     title: "PAVE: Mitigating Non-Congestive Delay for Seamless Video Calls over NextG Mobile Networks",
     venue: "IEEE INFOCOM",
