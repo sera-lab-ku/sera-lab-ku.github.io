@@ -60,8 +60,8 @@ export const researchAreas = [
 ];
 
 export const news: NewsItem[] = [
-  { date: "2026.08", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
-  { date: "2026.08", label: "Community", title: "Two research interns joined the lab." },
+  { date: "2026.07", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
+  { date: "2026.07", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.03", label: "Recognition", title: "A new paper was accepted to IEEE SECON 2026.", venues: ["IEEE SECON 2026"] },
   { date: "2026.01", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.01", label: "Award", title: "Goodsol received a Gold Award at Samsung HumanTech Paper Awards 2026.", venues: ["Samsung HumanTech Paper Awards 2026"] },
@@ -176,6 +176,7 @@ export const publications: Publication[] = [
     venue: "IEEE SECON",
     year: 2026,
     type: "Conference",
+    image: "/assets/images/publications/dualengine.png",
     link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11579018"
   },
   {
@@ -274,4 +275,4 @@ export const publications: Publication[] = [
   }
 ];
 
-export const featuredPublications = publications.slice(0, 4);
+export const featuredPublications = publications.slice(0, 6);
