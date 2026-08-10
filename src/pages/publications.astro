@@ -18,7 +18,7 @@ const years = [...new Set(publications.map((publication) => publication.year))];
           <div class="publication-list">
             {publications.filter((publication) => publication.year === year).map((paper) => (
               <article class="publication-row">
-                <div class="publication-row__image"><img src={paper.image} alt="" loading="lazy" /></div>
+                <div class="publication-row__image">{paper.image && <img src={paper.image} alt="" loading="lazy" />}</div>
                 <div class="publication-row__content">
                   <div class="publication-row__meta"><span>{paper.type}</span><span>{paper.venue}</span>{paper.note && <span class="status-pill">{paper.note}</span>}</div>
                   <h3>{paper.title}</h3>

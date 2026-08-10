@@ -292,6 +292,8 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .news-item:hover .news-item__date { color: var(--acid); }
 .news-item:hover .news-item__label { color: rgba(255,255,255,0.6); }
 .news-item h3 { font-size: clamp(0.95rem, 1.6vw, 1.16rem); letter-spacing: var(--tracking-heading); }
+.news-item__venue { color: var(--crimson-bright); font-weight: 700; }
+.news-item:hover .news-item__venue { color: var(--acid); }
 .news-item__arrow { font-size: 1.2rem; }
 .join-banner { padding: 1.3rem 0; color: var(--paper-white); background: var(--crimson); }
 .join-banner__inner { display: flex; justify-content: space-between; gap: 2rem; align-items: center; }
