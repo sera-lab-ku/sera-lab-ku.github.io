@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ResearchGlyph from "../components/ResearchGlyph.astro";
-import { featuredPublications, news, researchAreas, splitNewsTitle } from "../data/site";
+import { featuredPublications, news, newsPageSize, researchAreas, splitNewsTitle } from "../data/site";
 import { getImage } from "astro:assets";
 import campus from "../../photo/campus_4k.jpeg";
 
@@ -41,6 +41,35 @@ const campusBackground = await getImage({
     </div>
   </section>
 
+  <section class="section section--paper section--news">
+    <div class="shell">
+      <SectionHeading
+        eyebrow="Lab pulse"
+        title="What is moving at SERA."
+        copy="New work, new people, and milestones from the lab."
+      />
+      <div class="news-list" data-news-list>
+        {news.map((item) => (
+          <article class="news-item">
+            <span class="news-item__date">{item.date}</span>
+            <span class="news-item__label">{item.label}</span>
+            <h3>{splitNewsTitle(item).map((segment) => (
+              segment.venue ? <span class="news-item__venue">{segment.text}</span> : segment.text
+            ))}</h3>
+            <span class="news-item__arrow" aria-hidden="true">↗</span>
+          </article>
+        ))}
+      </div>
+      {news.length > newsPageSize && (
+        <nav class="pager" aria-label="Lab pulse pages" data-news-pager data-page-size={newsPageSize}>
+          {Array.from({ length: Math.ceil(news.length / newsPageSize) }, (_, i) => (
+            <button class="pager__page" type="button" data-page={i + 1} aria-current={i === 0 ? "true" : "false"}>{i + 1}</button>
+          ))}
+        </nav>
+      )}
+    </div>
+  </section>
+
   <section class="section section--paper section--research">
     <div class="shell">
       <SectionHeading
@@ -74,7 +103,8 @@ const campusBackground = await getImage({
       <div class="feature-band__metrics">
         <div><strong>XR</strong><span>Real-time, immersive media</span></div>
         <div><strong>AI</strong><span>Useful intelligence at the edge</span></div>
-        <div><strong>SYS</strong><span>Adaptive networked infrastructure</span></div>
+        <div><strong>SYS</strong><span>System software that runs AI efficiently</span></div>
+        <div><strong>NET</strong><span>Adaptive networked infrastructure</span></div>
       </div>
     </div>
   </section>
@@ -110,28 +140,6 @@ const campusBackground = await getImage({
     </div>
   </section>
 
-  <section class="section section--paper section--news">
-    <div class="shell">
-      <SectionHeading
-        eyebrow="Lab pulse"
-        title="What is moving at SERA."
-        copy="New work, new people, and milestones from the lab."
-      />
-      <div class="news-list">
-        {news.map((item) => (
-          <article class="news-item">
-            <span class="news-item__date">{item.date}</span>
-            <span class="news-item__label">{item.label}</span>
-            <h3>{splitNewsTitle(item).map((segment) => (
-              segment.venue ? <span class="news-item__venue">{segment.text}</span> : segment.text
-            ))}</h3>
-            <span class="news-item__arrow" aria-hidden="true">↗</span>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="section join-banner">
     <div class="shell join-banner__inner">
       <div>
@@ -142,3 +150,34 @@ const campusBackground = await getImage({
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  /**
+   * Pages the lab-pulse list client-side. Every entry ships in the HTML, so
+   * without JS the full list stays readable and the pager simply does nothing.
+   */
+  const list = document.querySelector<HTMLElement>("[data-news-list]");
+  const pager = document.querySelector<HTMLElement>("[data-news-pager]");
+
+  if (list && pager) {
+    const items = Array.from(list.children) as HTMLElement[];
+    const buttons = Array.from(pager.querySelectorAll<HTMLButtonElement>("[data-page]"));
+    const pageSize = Number(pager.dataset.pageSize) || items.length;
+
+    const showPage = (page: number) => {
+      items.forEach((item, index) => {
+        item.hidden = Math.floor(index / pageSize) !== page - 1;
+      });
+      buttons.forEach((button) => {
+        button.setAttribute("aria-current", String(Number(button.dataset.page) === page));
+      });
+    };
+
+    pager.addEventListener("click", (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-page]");
+      if (button) showPage(Number(button.dataset.page));
+    });
+
+    showPage(1);
+  }
+</script>

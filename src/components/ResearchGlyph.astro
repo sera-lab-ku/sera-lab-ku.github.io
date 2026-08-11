@@ -79,4 +79,26 @@ const { index } = Astro.props;
       <path d="M67 63 74 70l-9 1.5" opacity="0.55" />
     </svg>
   )}
+
+  {index === "04" && (
+    <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round">
+      {/* Topology the traffic could take. */}
+      <g opacity="0.4">
+        <path d="M26 34 80 18M80 18 134 40M26 34 54 80M54 80 112 74M112 74 134 40M80 18 54 80M80 18 112 74" />
+      </g>
+      {/* The route actually scheduled. */}
+      <path d="M26 34 80 18 112 74 134 40" stroke="var(--glyph-accent)" stroke-width="1.6" />
+      {/* Nodes, filled with the card background so links pass behind them. */}
+      <g fill="var(--glyph-bg)">
+        <circle cx="54" cy="80" r="5.4" opacity="0.9" />
+        <circle cx="26" cy="34" r="5.4" />
+        <circle cx="80" cy="18" r="5.4" />
+        <circle cx="112" cy="74" r="5.4" />
+        <circle cx="134" cy="40" r="5.4" stroke="var(--glyph-accent)" />
+      </g>
+      <g stroke="none" fill="var(--glyph-accent)">
+        <circle cx="134" cy="40" r="2.2" />
+      </g>
+    </svg>
+  )}
 </div>

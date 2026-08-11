@@ -56,16 +56,31 @@ export const researchAreas = [
     description:
       "We design collaborative AI agents that reason, coordinate, and act together to solve complex tasks across real systems.",
     tags: ["Multi-agent systems", "Agentic AI", "Distributed coordination"]
+  },
+  {
+    index: "04",
+    title: "Networked Systems",
+    description:
+      "Networks that adapt to the traffic they carry: cross-layer scheduling, transport, and measurement for real-time and learning-driven workloads.",
+    tags: ["Wireless networks", "Transport & scheduling", "Network measurement"]
   }
 ];
 
+/** Lab pulse entries shown per page. Read by the pager script off a data attribute. */
+export const newsPageSize = 8;
+
 export const news: NewsItem[] = [
+  { date: "2026.08", label: "Community", title: "Three master’s students joined the lab." },
   { date: "2026.07", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
   { date: "2026.07", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.03", label: "Recognition", title: "A new paper was accepted to IEEE SECON 2026.", venues: ["IEEE SECON 2026"] },
   { date: "2026.01", label: "Community", title: "Two research interns joined the lab." },
   { date: "2026.01", label: "Award", title: "Goodsol received a Gold Award at Samsung HumanTech Paper Awards 2026.", venues: ["Samsung HumanTech Paper Awards 2026"] },
-  { date: "2025.07", label: "Publication", title: "New papers were accepted to INFOCOM 2026 and NSDI 2026.", venues: ["INFOCOM 2026", "NSDI 2026"] }
+  { date: "2025.07", label: "Publication", title: "Two papers were accepted to USENIX NSDI 2026.", venues: ["USENIX NSDI 2026"] },
+  { date: "2025.07", label: "Publication", title: "A new paper was accepted to IEEE INFOCOM 2026.", venues: ["IEEE INFOCOM 2026"] },
+  { date: "2025.05", label: "Community", title: "Two research interns joined the lab." },
+  { date: "2025.05", label: "Publication", title: "A new paper was accepted to ACM MobiSys 2025.", venues: ["ACM MobiSys 2025"] },
+  { date: "2025.03", label: "Milestone", title: "SERA Lab officially launched in the Department of Computer Science and Engineering at Korea University." }
 ];
 
 /**
@@ -92,18 +107,10 @@ export const people: Person[] = [
     email: "sihyeon78945@gmail.com"
   },
   {
-    name: "Jaeyong Lee",
-    role: "Undergraduate Researcher",
-    group: "Undergraduate",
-    interests: ["Edge computing", "AI for short video"],
-    image: "/assets/images/team/jylee_photo.jpeg",
-    email: "wodydy0507@korea.ac.kr"
-  },
-  {
     name: "Byeongjun Kwon",
     role: "Undergraduate Researcher",
     group: "Undergraduate",
-    interests: ["vLLM"],
+    interests: ["vLLM", "GPU kernel optimization"],
     image: "/assets/images/team/bjkwon_photo.png"
   },
   {
@@ -117,7 +124,7 @@ export const people: Person[] = [
     name: "Sungwon Woo",
     role: "Master Student",
     group: "Master",
-    interests: ["Multi-agent systems", "Edge AI systems"],
+    interests: ["Multi-agent systems", "Edge AI systems", "GPU kernel optimization"],
     image: "/assets/images/team/swwoo_photo.JPG",
     email: "wkehdck753@naver.com"
   },
@@ -128,6 +135,14 @@ export const people: Person[] = [
     interests: ["AIOps", "RL for cloud scheduling"],
     image: "/assets/images/team/yrchoi_photo.png",
     email: "yr0955@gmail.com"
+  },
+  {
+    name: "Jaeyong Lee",
+    role: "Master Student",
+    group: "Master",
+    interests: ["Edge computing", "AI for short video"],
+    image: "/assets/images/team/jylee_photo.jpeg",
+    email: "wodydy0507@korea.ac.kr"
   },
   {
     name: "Hyeonjoon Jang",
