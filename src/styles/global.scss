@@ -162,17 +162,15 @@ ul, ol { padding: 0; margin: 0; list-style: none; }
 }
 .brand { display: inline-flex; gap: 0.66rem; align-items: center; width: max-content; }
 .brand__ku-logo { width: auto; height: 3.25rem; flex: 0 0 auto; filter: drop-shadow(0 1px 4px rgba(255,255,255,0.25)); }
+/* The logo artwork ships on an opaque light background, so it sits in a round
+   light badge rather than floating on the hero photo or the ink footer. */
 .brand__mark {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 auto;
   border-radius: 50%;
-  color: var(--paper-white);
-  background: var(--crimson-bright);
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  line-height: 1;
+  background: #f7f7f7;
+  object-fit: contain;
 }
 .brand__type { display: grid; gap: 0.02rem; }
 .brand__type strong { font-size: 0.78rem; letter-spacing: 0.08em; }
@@ -684,7 +682,6 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 /* Footer and error page */
 .site-footer { padding: 4.5rem 0 1.4rem; color: var(--paper-white); background: #090e14; }
 .site-footer__grid { display: grid; grid-template-columns: 1.2fr 0.55fr 0.9fr; gap: 3rem; padding-bottom: 4rem; }
-.brand--footer .brand__mark { background: var(--crimson); }
 .site-footer__statement { margin-top: 1.5rem; color: rgba(255,255,255,0.52); font-family: var(--serif); font-size: 1.2rem; line-height: 1.25; }
 .site-footer__links { display: grid; align-content: start; gap: 0.6rem; font-size: 0.82rem; font-weight: 700; }
 .site-footer__links a:hover, .site-footer__contact a:hover { color: var(--acid); }
