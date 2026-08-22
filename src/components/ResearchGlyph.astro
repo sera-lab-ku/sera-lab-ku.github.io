@@ -101,4 +101,35 @@ const { index } = Astro.props;
       </g>
     </svg>
   )}
+
+  {index === "05" && (
+    <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round">
+      {/* Queued jobs waiting on the scheduler. */}
+      <g opacity="0.55">
+        <rect x="12" y="30" width="17" height="11" rx="1.5" />
+        <rect x="12" y="45" width="17" height="11" rx="1.5" />
+        <rect x="12" y="60" width="17" height="11" rx="1.5" />
+      </g>
+      {/* Placement decision. */}
+      <path d="M33 50h18" stroke="var(--glyph-accent)" stroke-dasharray="3 4" />
+      {/* Accelerators in the cluster, one of them assigned. */}
+      <g opacity="0.9">
+        <rect x="58" y="18" width="30" height="20" rx="2.5" />
+        <rect x="58" y="42" width="30" height="20" rx="2.5" stroke="var(--glyph-accent)" />
+        <rect x="58" y="66" width="30" height="20" rx="2.5" />
+        <rect x="98" y="18" width="30" height="20" rx="2.5" />
+        <rect x="98" y="42" width="30" height="20" rx="2.5" />
+        <rect x="98" y="66" width="30" height="20" rx="2.5" />
+      </g>
+      {/* Utilisation read back from the cluster. */}
+      <g opacity="0.5">
+        <path d="M64 32h8M104 32h14M64 80h18M104 80h6" />
+      </g>
+      <g stroke="none" fill="var(--glyph-accent)">
+        <rect x="64" y="56" width="18" height="2.4" rx="1.2" />
+        <circle cx="140" cy="52" r="2.6" />
+      </g>
+      <path d="M128 52h6" opacity="0.5" />
+    </svg>
+  )}
 </div>

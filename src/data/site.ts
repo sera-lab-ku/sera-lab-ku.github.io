@@ -1,3 +1,6 @@
+/** Research-area keys. Publications carry these so each area can list its work. */
+export type AreaId = "xr" | "edge" | "agents" | "net" | "infra";
+
 export type Publication = {
   title: string;
   authors?: string;
@@ -7,6 +10,7 @@ export type Publication = {
   image?: string;
   link?: string;
   note?: string;
+  areas?: AreaId[];
 };
 
 export type NewsItem = {
@@ -35,8 +39,15 @@ export const navigation = [
   { label: "Photos", href: "/photos/" }
 ];
 
-export const researchAreas = [
+export const researchAreas: {
+  id: AreaId;
+  index: string;
+  title: string;
+  description: string;
+  tags: string[];
+}[] = [
   {
+    id: "xr",
     index: "01",
     title: "Extended Reality Systems",
     description:
@@ -44,6 +55,7 @@ export const researchAreas = [
     tags: ["Volumetric video", "Real-time media", "QoE"]
   },
   {
+    id: "edge",
     index: "02",
     title: "AI at the Edge",
     description:
@@ -51,6 +63,7 @@ export const researchAreas = [
     tags: ["Edge AI", "NPU systems", "On-device intelligence"]
   },
   {
+    id: "agents",
     index: "03",
     title: "Multi-Agent Systems",
     description:
@@ -58,15 +71,24 @@ export const researchAreas = [
     tags: ["Multi-agent systems", "Agentic AI", "Distributed coordination"]
   },
   {
+    id: "net",
     index: "04",
     title: "Networked Systems",
     description:
       "Networks that adapt to the traffic they carry: cross-layer scheduling, transport, and measurement for real-time and learning-driven workloads.",
     tags: ["Wireless networks", "Transport & scheduling", "Network measurement"]
+  },
+  {
+    id: "infra",
+    index: "05",
+    title: "AI Infrastructure",
+    description:
+      "Scheduling, memory, and resource management for the clusters that train and serve models — where the workload itself is learned.",
+    tags: ["GPU cluster scheduling", "LLM serving", "RL for systems"]
   }
 ];
 
-/** Lab pulse entries shown per page. Read by the pager script off a data attribute. */
+/** News entries shown per page. Read by the pager script off a data attribute. */
 export const newsPageSize = 8;
 
 export const news: NewsItem[] = [
@@ -159,7 +181,8 @@ export const publications: Publication[] = [
     venue: "ACM SIGCOMM",
     year: 2026,
     type: "Conference",
-    image: "/assets/images/publications/deepsfu.png"
+    image: "/assets/images/publications/deepsfu.png",
+    areas: ["net"]
   },
   {
     title: "PAVE: Mitigating Non-Congestive Delay for Seamless Video Calls over NextG Mobile Networks",
@@ -167,7 +190,8 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/PAVE.png",
-    link: "https://doi.org/10.1109/INFOCOM59046.2026.11571323"
+    link: "https://doi.org/10.1109/INFOCOM59046.2026.11571323",
+    areas: ["net"]
   },
   {
     title: "eXpressSFU: Toward Super-Scalable Video Conferencing with SmartNICs",
@@ -175,7 +199,8 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/expresssfu.png",
-    link: "https://www.usenix.org/conference/nsdi26/presentation/tran"
+    link: "https://www.usenix.org/conference/nsdi26/presentation/tran",
+    areas: ["net"]
   },
   {
     title: "QCON: Seamless QoE-Aware 5G Streaming via Multi-Connectivity",
@@ -183,7 +208,8 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/QCON.png",
-    link: "https://www.usenix.org/conference/nsdi26/presentation/lee"
+    link: "https://www.usenix.org/conference/nsdi26/presentation/lee",
+    areas: ["net"]
   },
   {
     title: "DualEngine: A Thermal-Aware Vision Inference Framework via Mobile and Cloud Co-Execution",
@@ -192,7 +218,8 @@ export const publications: Publication[] = [
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/dualengine.png",
-    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11579018"
+    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11579018",
+    areas: ["edge"]
   },
   {
     title: "DeltaStream: 2D-Inferred Delta Encoding for Live Volumetric Video Streaming",
@@ -201,7 +228,8 @@ export const publications: Publication[] = [
     year: 2025,
     type: "Conference",
     image: "/assets/images/publications/deltastream.png",
-    link: "https://dl.acm.org/doi/abs/10.1145/3711875.3729131"
+    link: "https://dl.acm.org/doi/abs/10.1145/3711875.3729131",
+    areas: ["xr"]
   },
   {
     title: "NeuroBalancer: Balancing System Frequencies with Punctual Laziness for Timely and Energy-efficient DNN Inferences",
@@ -210,7 +238,8 @@ export const publications: Publication[] = [
     year: 2025,
     type: "Journal",
     image: "/assets/images/publications/neurobalancer.jpg",
-    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10819653"
+    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10819653",
+    areas: ["edge"]
   },
   {
     title: "Dejavu: Reinforcement Learning-based Cloud Scheduling with Demonstration and Competition",
@@ -219,7 +248,8 @@ export const publications: Publication[] = [
     year: 2024,
     type: "Conference",
     image: "/assets/images/publications/dejavu.jpg",
-    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10723527"
+    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10723527",
+    areas: ["infra"]
   },
   {
     title: "LLMem: Estimating GPU Memory Usage for Fine-Tuning Pre-Trained LLMs",
@@ -229,7 +259,8 @@ export const publications: Publication[] = [
     type: "Conference",
     image: "/assets/images/publications/llmem.jpg",
     link: "https://arxiv.org/pdf/2404.10933",
-    note: "Long talk · Top 2%"
+    note: "Long talk · Top 2%",
+    areas: ["infra"]
   },
   {
     title: "Repurposing Cellular Reference Signals: Accurate RSRP Measurements with Mobile Phones",
@@ -238,7 +269,8 @@ export const publications: Publication[] = [
     year: 2024,
     type: "Workshop",
     image: "/assets/images/publications/repurposing.jpg",
-    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10632813"
+    link: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10632813",
+    areas: ["net"]
   },
   {
     title: "CoActo: CoActive Neural Network Inference Offloading with Fine-grained and Concurrent Execution",
@@ -247,7 +279,8 @@ export const publications: Publication[] = [
     year: 2024,
     type: "Conference",
     image: "/assets/images/publications/coacto.jpg",
-    link: "https://dl.acm.org/doi/pdf/10.1145/3643832.3661885"
+    link: "https://dl.acm.org/doi/pdf/10.1145/3643832.3661885",
+    areas: ["edge"]
   },
   {
     title: "ENTRO: Tackling the Encoding and Networking Trade-off in Offloaded Video Analytics",
@@ -256,7 +289,8 @@ export const publications: Publication[] = [
     year: 2023,
     type: "Conference",
     image: "/assets/images/publications/entro.jpg",
-    link: "https://dl.acm.org/doi/pdf/10.1145/3581783.3613785"
+    link: "https://dl.acm.org/doi/pdf/10.1145/3581783.3613785",
+    areas: ["edge", "net"]
   },
   {
     title: "zTT: Learning-based DVFS with Zero Thermal Throttling for Mobile Devices",
@@ -266,7 +300,8 @@ export const publications: Publication[] = [
     type: "Magazine",
     image: "/assets/images/publications/ztt_getmobile.jpg",
     link: "https://dl.acm.org/doi/pdf/10.1145/3529706.3529714",
-    note: "Invited paper · Highlight"
+    note: "Invited paper · Highlight",
+    areas: ["edge"]
   },
   {
     title: "RL-based FEC Adjustment for Better QoE in WebRTC",
@@ -276,7 +311,8 @@ export const publications: Publication[] = [
     type: "Conference",
     image: "/assets/images/publications/rfec.jpg",
     link: "https://dl.acm.org/doi/pdf/10.1145/3503161.3548370",
-    note: "Oral · Top 2%"
+    note: "Oral · Top 2%",
+    areas: ["net"]
   },
   {
     title: "zTT: Learning-based DVFS with Zero Thermal Throttling for Mobile Devices",
@@ -286,8 +322,19 @@ export const publications: Publication[] = [
     type: "Conference",
     image: "/assets/images/publications/ztt_mobisys.jpg",
     link: "https://dl.acm.org/doi/pdf/10.1145/3458864.3468161",
-    note: "Best Paper"
+    note: "Best Paper",
+    areas: ["edge"]
   }
 ];
 
 export const featuredPublications = publications.slice(0, 6);
+
+/**
+ * Publications tagged with a research area, newest first. Areas with no papers
+ * yet return an empty list, and the research page simply omits the section.
+ */
+export function publicationsByArea(area: AreaId): Publication[] {
+  return publications
+    .filter((paper) => paper.areas?.includes(area))
+    .sort((a, b) => b.year - a.year);
+}

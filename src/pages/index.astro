@@ -25,7 +25,7 @@ const campusBackground = await getImage({
         <p class="eyebrow eyebrow--light">Korea University · Computer Science &amp; Engineering</p>
         <h1><em>Systems</em> for Extended Reality and AI Lab</h1>
         <p class="hero__lede">
-          We build the systems layer behind extended reality and AI: responsive media, capable edge devices, and infrastructure that learns.
+          We build the systems layer behind extended reality and AI — real-time media pipelines, on-device inference, and the networks underneath them.
         </p>
         <div class="hero__actions">
           <a class="button button--light" href="/research/">Explore our research <span aria-hidden="true">↘</span></a>
@@ -35,7 +35,7 @@ const campusBackground = await getImage({
 
     </div>
     <div class="shell hero__footer">
-      <span>Scroll to enter</span>
+      <span>Korea University</span>
       <span class="hero__line" aria-hidden="true"></span>
       <span>Seoul · Republic of Korea</span>
     </div>
@@ -44,9 +44,9 @@ const campusBackground = await getImage({
   <section class="section section--paper section--news">
     <div class="shell">
       <SectionHeading
-        eyebrow="Lab pulse"
-        title="What is moving at SERA."
-        copy="New work, new people, and milestones from the lab."
+        eyebrow="News"
+        title="Recent news."
+        copy="Papers, people, and lab milestones."
       />
       <div class="news-list" data-news-list>
         {news.map((item) => (
@@ -61,7 +61,7 @@ const campusBackground = await getImage({
         ))}
       </div>
       {news.length > newsPageSize && (
-        <nav class="pager" aria-label="Lab pulse pages" data-news-pager data-page-size={newsPageSize}>
+        <nav class="pager" aria-label="News pages" data-news-pager data-page-size={newsPageSize}>
           {Array.from({ length: Math.ceil(news.length / newsPageSize) }, (_, i) => (
             <button class="pager__page" type="button" data-page={i + 1} aria-current={i === 0 ? "true" : "false"}>{i + 1}</button>
           ))}
@@ -74,8 +74,7 @@ const campusBackground = await getImage({
     <div class="shell">
       <SectionHeading
         eyebrow="Research focus"
-        title="We work where systems become felt."
-        copy="Our questions are technical, but the outcome is human: experiences that feel immediate, intelligence that fits in the world, and infrastructure that earns trust."
+        title="What we work on."
         link={{ href: "/research/", label: "See all research areas" }}
       />
       <div class="research-grid">
@@ -94,27 +93,12 @@ const campusBackground = await getImage({
     </div>
   </section>
 
-  <section class="section section--ink feature-band">
-    <div class="shell feature-band__grid">
-      <div class="feature-band__statement">
-        <p class="eyebrow eyebrow--light">A systems view</p>
-        <p>Better experiences are not a layer on top of infrastructure. They are a property of the whole system.</p>
-      </div>
-      <div class="feature-band__metrics">
-        <div><strong>XR</strong><span>Real-time, immersive media</span></div>
-        <div><strong>AI</strong><span>Useful intelligence at the edge</span></div>
-        <div><strong>SYS</strong><span>System software that runs AI efficiently</span></div>
-        <div><strong>NET</strong><span>Adaptive networked infrastructure</span></div>
-      </div>
-    </div>
-  </section>
-
   <section class="section section--paper section--publications">
     <div class="shell">
       <SectionHeading
         eyebrow="Selected work"
-        title="Research with a clear path to impact."
-        copy="A selection of recent papers across immersive systems, scalable media, and learning-driven infrastructure."
+        title="Recent papers."
+        copy="Work from the lab and our collaborators, at systems and networking venues."
         link={{ href: "/publications/", label: "Browse publications" }}
       />
       <div class="featured-publications">
@@ -144,7 +128,7 @@ const campusBackground = await getImage({
     <div class="shell join-banner__inner">
       <div>
         <p class="eyebrow">Build with us</p>
-        <h2>Curious people make strong systems.</h2>
+        <h2>We are recruiting graduate and undergraduate researchers.</h2>
       </div>
       <a class="button button--dark" href="/join/">Join SERA <span aria-hidden="true">↗</span></a>
     </div>
@@ -153,7 +137,7 @@ const campusBackground = await getImage({
 
 <script>
   /**
-   * Pages the lab-pulse list client-side. Every entry ships in the HTML, so
+   * Pages the news list client-side. Every entry ships in the HTML, so
    * without JS the full list stays readable and the pager simply does nothing.
    */
   const list = document.querySelector<HTMLElement>("[data-news-list]");

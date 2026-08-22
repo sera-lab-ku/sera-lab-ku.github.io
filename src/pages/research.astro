@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
-import { researchAreas } from "../data/site";
+import { publicationsByArea, researchAreas } from "../data/site";
 import { getImage } from "astro:assets";
 import campus from "../../photo/campus_4k.jpeg";
 
@@ -16,8 +16,8 @@ const campusBackground = await getImage({
 <BaseLayout title="Research — SERA Lab." description="Research areas at SERA Lab: extended reality, edge AI, multi-agent systems, and networked systems.">
   <PageIntro
     eyebrow="Research"
-    title="We design for the moment a system becomes real."
-    copy="SERA studies systems that need to work under real constraints: changing networks, limited devices, demanding users, and intelligence that must earn its place."
+    title="Research areas."
+    copy="We build and measure systems under the constraints they actually run in: variable networks, limited devices, and latency budgets that users notice when you miss them."
     backgroundImage={campusBackground.src}
   />
 
@@ -30,6 +30,18 @@ const campusBackground = await getImage({
             <h2>{area.title}</h2>
             <p>{area.description}</p>
             <ul class="tag-list">{area.tags.map((tag) => <li>{tag}</li>)}</ul>
+            {publicationsByArea(area.id).length > 0 && (
+              <ul class="research-detail__papers">
+                {publicationsByArea(area.id).map((paper) => (
+                  <li>
+                    <span class="research-detail__venue">{paper.venue} {paper.year}</span>
+                    {paper.link
+                      ? <a href={paper.link} target="_blank" rel="noreferrer">{paper.title}</a>
+                      : <span>{paper.title}</span>}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div class={`research-detail__visual research-detail__visual--${index + 1}`} aria-hidden="true">
             <span></span><span></span><span></span>
@@ -43,11 +55,11 @@ const campusBackground = await getImage({
     <div class="shell research-principles">
       <p class="eyebrow">How we work</p>
       <div class="research-principles__grid">
-        <p>Deep dive to system.<br /><em>Find breakthrough.</em></p>
+        <p>Go deep into the system.<br /><em>That is where the wins are.</em></p>
         <ul>
-          <li><span>01</span> Begin from a real systems bottleneck.</li>
-          <li><span>02</span> Connect algorithmic ideas to end-to-end behavior.</li>
-          <li><span>03</span> Judge success by what users and systems can actually sustain.</li>
+          <li><span>01</span> Start from a bottleneck we have measured, not assumed.</li>
+          <li><span>02</span> Take the idea all the way to an end-to-end implementation.</li>
+          <li><span>03</span> Evaluate on real devices and real workloads.</li>
         </ul>
       </div>
     </div>
