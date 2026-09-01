@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import collaborationWorkshop01 from "../../photo/2026/icnl-sera-workshop-2026.webp";
+import collaborationWorkshop02 from "../../photo/2026/icnl-sera-workshop-2026-02.webp";
+import collaborationWorkshop03 from "../../photo/2026/icnl-sera-workshop-2026-03.webp";
+import collaborationWorkshop04 from "../../photo/2026/icnl-sera-workshop-2026-04.webp";
 import labLife from "../../photo/2026/photo_0.jpg";
 import teamNight from "../../photo/2026/photo_1.jpg";
 import campusPicnic from "../../photo/2026/photo_2.jpg";
@@ -8,26 +12,55 @@ import celebration from "../../photo/2026/photo_3.jpg";
 
 const photoYears = [{
   year: 2026,
-  photos: [
+  posts: [
     {
-      image: celebration,
-      alt: "SERA Lab members celebrating together with flowers and a cake",
-      label: "스승의 날, 감사합니다!"
+      title: "ICNL × SERA Lab 협력 워크숍",
+      photos: [
+        {
+          image: collaborationWorkshop01,
+          alt: "ICNL and SERA Lab members posing together after their collaborative workshop"
+        },
+        {
+          image: collaborationWorkshop02,
+          alt: "ICNL and SERA Lab members playing soccer together during their collaborative workshop"
+        },
+        {
+          image: collaborationWorkshop03,
+          alt: "ICNL and SERA Lab members playing a group game during their collaborative workshop"
+        },
+        {
+          image: collaborationWorkshop04,
+          alt: "ICNL and SERA Lab members sharing a meal together during their collaborative workshop"
+        }
+      ]
     },
     {
-      image: campusPicnic,
-      alt: "SERA Lab members enjoying a picnic together on the Korea University campus",
-      label: "고려대학교 중짜 봄 피크닉"
+      title: "스승의 날, 감사합니다!",
+      photos: [{
+        image: celebration,
+        alt: "SERA Lab members celebrating together with flowers and a cake"
+      }]
     },
     {
-      image: labLife,
-      alt: "A SERA Lab member holding a laptop during a gathering in the lab",
-      label: "랩장 일상"
+      title: "고려대학교 중짜 봄 피크닉",
+      photos: [{
+        image: campusPicnic,
+        alt: "SERA Lab members enjoying a picnic together on the Korea University campus"
+      }]
     },
     {
-      image: teamNight,
-      alt: "SERA Lab members taking a group selfie during an evening out",
-      label: "저녁 회식"
+      title: "랩장 일상",
+      photos: [{
+        image: labLife,
+        alt: "A SERA Lab member holding a laptop during a gathering in the lab"
+      }]
+    },
+    {
+      title: "저녁 회식",
+      photos: [{
+        image: teamNight,
+        alt: "SERA Lab members taking a group selfie during an evening out"
+      }]
     }
   ]
 }].sort((a, b) => b.year - a.year);
@@ -45,31 +78,258 @@ const photoYears = [{
         <section class="photo-year" aria-labelledby={`photo-year-${photoYear.year}`}>
           <div class="photo-year__heading">
             <h2 id={`photo-year-${photoYear.year}`}>{photoYear.year}</h2>
-            <p>{photoYear.photos.length.toString().padStart(2, "0")} moments</p>
+            <p>{photoYear.posts.length.toString().padStart(2, "0")} feeds</p>
           </div>
-          <div class="photo-journal">
-            {photoYear.photos.map((photo, index) => (
-              <figure class="photo-story">
-                <div class="photo-story__image">
-                  <Image src={photo.image} alt={photo.alt} widths={[480, 720, 960]} sizes="(max-width: 680px) 100vw, 50vw" loading={yearIndex === 0 && index === 0 ? "eager" : "lazy"} />
-                </div>
-                <figcaption>
-                  <span>{(index + 1).toString().padStart(2, "0")}</span>
-                  <p>{photo.label}</p>
-                  <span>{photoYear.year}</span>
-                </figcaption>
-              </figure>
-            ))}
+
+          <div class="photo-feed-list">
+            {photoYear.posts.map((post, postIndex) => {
+              const postId = `photo-post-${photoYear.year}-${postIndex + 1}`;
+              const hasMultiplePhotos = post.photos.length > 1;
+              const heartGradientId = `heart-gradient-${photoYear.year}-${postIndex + 1}`;
+
+              return (
+                <article
+                  class="photo-carousel photo-feed"
+                  data-photo-carousel
+                  aria-labelledby={postId}
+                >
+                  <div class="photo-carousel__topbar">
+                    <div class="photo-carousel__identity">
+                      <span class="photo-carousel__avatar" aria-hidden="true">S</span>
+                      <span>
+                        <strong>SERA Lab.</strong>
+                        <small>{photoYear.year} · Moment {(postIndex + 1).toString().padStart(2, "0")}</small>
+                      </span>
+                    </div>
+                    <span class="photo-feed__more" aria-hidden="true">•••</span>
+                  </div>
+
+                  <div
+                    class:list={["photo-carousel__viewport", { "photo-carousel__viewport--single": !hasMultiplePhotos }]}
+                    data-carousel-viewport
+                    tabindex={hasMultiplePhotos ? "0" : undefined}
+                    aria-label={hasMultiplePhotos ? "Photo carousel. Use the left and right arrow keys to navigate." : undefined}
+                    >
+                    <div class="photo-carousel__track" data-carousel-track>
+                      {post.photos.map((photo, index) => (
+                        <figure
+                          class="photo-slide"
+                          data-carousel-slide
+                          aria-roledescription={hasMultiplePhotos ? "slide" : undefined}
+                          aria-label={hasMultiplePhotos ? `${index + 1} of ${post.photos.length}` : undefined}
+                          aria-hidden={index === 0 ? "false" : "true"}
+                        >
+                          <div class="photo-slide__media">
+                            <Image
+                              src={photo.image}
+                              alt={photo.alt}
+                              widths={[480, 720, 960, 1280]}
+                              sizes="(max-width: 680px) calc(100vw - 3.5rem), 760px"
+                              loading={yearIndex === 0 && postIndex === 0 && index === 0 ? "eager" : "lazy"}
+                            />
+                          </div>
+                          <figcaption class="visually-hidden">
+                            {post.title}, photo {index + 1} of {post.photos.length}
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+
+                    {hasMultiplePhotos && (
+                      <span class="photo-carousel__position" data-carousel-count aria-hidden="true">
+                        1 / {post.photos.length}
+                      </span>
+                    )}
+
+                    {hasMultiplePhotos && (
+                      <>
+                        <button class="photo-carousel__nav photo-carousel__nav--prev" type="button" data-carousel-prev aria-label="Previous photo">
+                          <span aria-hidden="true">←</span>
+                        </button>
+                        <button class="photo-carousel__nav photo-carousel__nav--next" type="button" data-carousel-next aria-label="Next photo">
+                          <span aria-hidden="true">→</span>
+                        </button>
+                      </>
+                    )}
+                  </div>
+
+                  <div class="photo-feed__toolbar">
+                    <span class="photo-feed__actions">
+                      <button
+                        class="photo-feed__like"
+                        type="button"
+                        data-photo-like
+                        aria-label={`Like ${post.title}`}
+                        aria-pressed="false"
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <defs>
+                            <linearGradient id={heartGradientId} x1="2" y1="3" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+                              <stop offset="0" stop-color="#ffb13b" />
+                              <stop offset="0.42" stop-color="#f02f69" />
+                              <stop offset="1" stop-color="#8b43e8" />
+                            </linearGradient>
+                          </defs>
+                          <path class="photo-feed__heart-outline" d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" />
+                          <path class="photo-feed__heart-fill" fill={`url(#${heartGradientId})`} d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" />
+                        </svg>
+                      </button>
+                      <span class="photo-feed__action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.5 9.5 0 0 1-4-.9L3 21l1.8-4.7a8.5 8.5 0 1 1 16.2-4.8Z" /></svg></span>
+                      <span class="photo-feed__action-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg></span>
+                    </span>
+
+                    {hasMultiplePhotos ? (
+                      <div class="photo-carousel__steps" aria-label="Choose a photo">
+                        {post.photos.map((_, index) => (
+                          <button
+                            type="button"
+                            data-carousel-step
+                            aria-label={`View photo ${index + 1} of ${post.photos.length}`}
+                            aria-current={index === 0 ? "true" : "false"}
+                          ><span></span></button>
+                        ))}
+                      </div>
+                    ) : <span></span>}
+
+                    <span class="photo-feed__bookmark" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4Z" /></svg>
+                    </span>
+                  </div>
+
+                  <footer class="photo-feed__footer">
+                    <div class="photo-feed__caption">
+                      <h3 id={postId}><strong>SERA Lab.</strong> <span>{post.title}</span></h3>
+                      <p>{photoYear.year} · Moment {(postIndex + 1).toString().padStart(2, "0")}</p>
+                    </div>
+                  </footer>
+
+                  {hasMultiplePhotos && (
+                    <p class="visually-hidden" data-carousel-status aria-live="polite">
+                      Photo 1 of {post.photos.length}: {post.title}
+                    </p>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </section>
       ))}
     </div>
   </section>
 
-  <section class="section section--fog photos-note">
-    <div class="shell photos-note__inner">
-      <p class="eyebrow">In between the research</p>
-      <p>Picnics, dinners, and the occasional <em>cake.</em></p>
-    </div>
-  </section>
 </BaseLayout>
+
+<script>
+  const carousels = document.querySelectorAll<HTMLElement>("[data-photo-carousel]");
+
+  carousels.forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+    const viewport = carousel.querySelector<HTMLElement>("[data-carousel-viewport]");
+    const previous = carousel.querySelector<HTMLButtonElement>("[data-carousel-prev]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-carousel-next]");
+    const counter = carousel.querySelector<HTMLElement>("[data-carousel-count]");
+    const status = carousel.querySelector<HTMLElement>("[data-carousel-status]");
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]"));
+    const steps = Array.from(carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-step]"));
+
+    if (!track || !viewport || slides.length === 0) return;
+
+    let current = 0;
+    let dragStart: number | null = null;
+    let dragDelta = 0;
+
+    const render = (newIndex: number, announce = true) => {
+      current = Math.max(0, Math.min(newIndex, slides.length - 1));
+      track.style.transform = `translate3d(${-current * 100}%, 0, 0)`;
+
+      slides.forEach((slide, index) => {
+        slide.setAttribute("aria-hidden", index === current ? "false" : "true");
+      });
+
+      steps.forEach((step, index) => {
+        step.setAttribute("aria-current", index === current ? "true" : "false");
+      });
+
+      if (previous) previous.disabled = current === 0;
+      if (next) next.disabled = current === slides.length - 1;
+      if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+      if (status && announce) status.textContent = `Photo ${current + 1} of ${slides.length}`;
+    };
+
+    render(0, false);
+    if (slides.length < 2 || !previous || !next) return;
+
+    const finishDrag = (event: PointerEvent) => {
+      if (dragStart === null) return;
+
+      const threshold = Math.min(100, viewport.clientWidth * 0.14);
+      const target = Math.abs(dragDelta) > threshold
+        ? current + (dragDelta < 0 ? 1 : -1)
+        : current;
+
+      if (viewport.hasPointerCapture(event.pointerId)) {
+        viewport.releasePointerCapture(event.pointerId);
+      }
+
+      dragStart = null;
+      dragDelta = 0;
+      carousel.classList.remove("is-dragging");
+      render(target);
+    };
+
+    previous.addEventListener("click", () => render(current - 1));
+    next.addEventListener("click", () => render(current + 1));
+    steps.forEach((step, index) => step.addEventListener("click", () => render(index)));
+
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        render(current - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        render(current + 1);
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        render(0);
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        render(slides.length - 1);
+      }
+    });
+
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      if ((event.target as HTMLElement).closest("button")) return;
+
+      dragStart = event.clientX;
+      dragDelta = 0;
+      viewport.setPointerCapture(event.pointerId);
+      carousel.classList.add("is-dragging");
+    });
+
+    viewport.addEventListener("pointermove", (event) => {
+      if (dragStart === null) return;
+
+      dragDelta = event.clientX - dragStart;
+      const isPastStart = current === 0 && dragDelta > 0;
+      const isPastEnd = current === slides.length - 1 && dragDelta < 0;
+      const offset = isPastStart || isPastEnd ? dragDelta * 0.2 : dragDelta;
+      track.style.transform = `translate3d(calc(${-current * 100}% + ${offset}px), 0, 0)`;
+    });
+
+    viewport.addEventListener("pointerup", finishDrag);
+    viewport.addEventListener("pointercancel", finishDrag);
+    viewport.addEventListener("dragstart", (event) => event.preventDefault());
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-photo-like]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const isLiked = button.getAttribute("aria-pressed") !== "true";
+      button.setAttribute("aria-pressed", isLiked.toString());
+      button.classList.toggle("is-liked", isLiked);
+    });
+  });
+</script>
