@@ -771,12 +771,6 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .photo-carousel__nav span { font-size: 1.15rem; line-height: 1; }
 .photo-carousel__nav--prev { left: 1rem; }
 .photo-carousel__nav--next { right: 1rem; }
-.photos-note { padding-top: clamp(4rem, 7vw, 6.5rem); }
-.photos-note__inner { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 2rem; align-items: start; }
-.photos-note__inner .eyebrow { margin: 0; }
-.photos-note__inner > p:last-child { max-width: 52rem; font-family: var(--serif); font-size: clamp(2.5rem, 4.5vw, 4.8rem); letter-spacing: var(--tracking-display); line-height: 0.98; }
-.photos-note__inner em { color: var(--crimson); }
-
 @keyframes photo-reveal {
   from { opacity: 0.72; transform: scale(1.012); }
   to { opacity: 1; transform: scale(1); }
@@ -1000,7 +994,6 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .photo-carousel__nav { top: 50%; width: 2.5rem; height: 2.5rem; }
   .photo-carousel__nav--prev { left: 0.65rem; }
   .photo-carousel__nav--next { right: 0.65rem; }
-  .photos-note__inner { grid-template-columns: 1fr; gap: 1.5rem; }
   .hardware-page__summary { gap: 1rem; }
   .hardware-page__summary p:last-child { text-align: right; }
   .hardware-item { grid-template-columns: 1fr; gap: 2rem; padding: 2.4rem 0; }
