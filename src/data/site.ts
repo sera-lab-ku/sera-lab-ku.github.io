@@ -140,7 +140,7 @@ export const people: Person[] = [
     role: "Undergraduate Researcher",
     group: "Undergraduate",
     interests: ["Edge NPU"],
-    image: "/assets/images/team/undergraduate_sample.png"
+    image: "/assets/images/team/jshwang_photo.jpg"
   },
   {
     name: "Sungwon Woo",
