@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import labGroupTigerStatue from "../../photo/2026/lab-group-tiger-statue-2026.jpg";
 import collaborationWorkshop01 from "../../photo/2026/icnl-sera-workshop-2026.webp";
 import collaborationWorkshop02 from "../../photo/2026/icnl-sera-workshop-2026-02.webp";
 import collaborationWorkshop03 from "../../photo/2026/icnl-sera-workshop-2026-03.webp";
@@ -13,6 +14,13 @@ import celebration from "../../photo/2026/photo_3.jpg";
 const photoYears = [{
   year: 2026,
   posts: [
+    {
+      title: "연구실 단체 사진 (feat. 호랑이 동상)",
+      photos: [{
+        image: labGroupTigerStatue,
+        alt: "SERA Lab members posing together by the tiger statue"
+      }]
+    },
     {
       title: "ICNL × SERA Lab 협력 워크숍",
       photos: [
