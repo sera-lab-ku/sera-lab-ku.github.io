@@ -58,11 +58,14 @@ const campusBackground = await getImage({
                   aria-label={`${index + 1} of ${allPhotos.length}`}
                   aria-hidden={index === 0 ? "false" : "true"}
                 >
+                  {/* The slow push-in scales the frame past its box, so `sizes`
+                      claims the zoomed width and the browser keeps the detail. */}
                   <Image
                     src={photo.image}
                     alt={photo.alt}
-                    widths={[440, 660, 880]}
-                    sizes="(max-width: 680px) calc(100vw - 3rem), 27rem"
+                    widths={[600, 900, 1200, 1600]}
+                    sizes="(max-width: 680px) calc((100vw - 3rem) * 1.06), 29rem"
+                    quality={90}
                     loading={index === 0 ? "eager" : "lazy"}
                   />
                   <figcaption class="hero-showcase__caption">

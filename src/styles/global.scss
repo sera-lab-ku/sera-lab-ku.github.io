@@ -337,7 +337,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   inset: 0;
   content: "";
   pointer-events: none;
-  background: linear-gradient(to top, rgba(8, 11, 16, 0.86) 0%, rgba(8, 11, 16, 0.28) 34%, rgba(8, 11, 16, 0.08) 58%, rgba(8, 11, 16, 0.42) 100%);
+  background: linear-gradient(to top, rgba(8, 11, 16, 0.78) 0%, rgba(8, 11, 16, 0.16) 36%, rgba(8, 11, 16, 0) 56%, rgba(8, 11, 16, 0.3) 100%);
 }
 .hero-showcase__caption {
   position: absolute;
@@ -458,8 +458,8 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .hero-showcase__hint { color: rgba(255,255,255,0.5); font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
 @keyframes showcase-zoom {
-  from { transform: scale(1.001); }
-  to { transform: scale(1.085); }
+  from { transform: scale(1.002); }
+  to { transform: scale(1.055); }
 }
 @keyframes showcase-caption {
   from { opacity: 0; transform: translateY(0.8rem); }
