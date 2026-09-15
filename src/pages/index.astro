@@ -3,7 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ResearchGlyph from "../components/ResearchGlyph.astro";
 import { featuredPublications, news, newsPageSize, researchAreas, splitNewsTitle } from "../data/site";
-import { getImage } from "astro:assets";
+import { allPhotos } from "../data/photos";
+import { getImage, Image } from "astro:assets";
 import campus from "../../photo/campus_4k.jpeg";
 
 const campusBackground = await getImage({
@@ -33,6 +34,81 @@ const campusBackground = await getImage({
         </div>
       </div>
 
+      <div
+        class="hero-showcase"
+        data-hero-showcase
+        data-autoplay="5000"
+        style={`--showcase-autoplay: 5000ms`}
+        aria-roledescription="carousel"
+        aria-label="Photos from the lab"
+      >
+        <div class="hero-showcase__frame">
+          <div
+            class="hero-showcase__viewport"
+            data-showcase-viewport
+            tabindex="0"
+            aria-label="Lab photo slideshow. Scroll, drag, or use the left and right arrow keys to change photo."
+          >
+            <div class="hero-showcase__track" data-showcase-track>
+              {allPhotos.map((photo, index) => (
+                <figure
+                  class="hero-showcase__slide"
+                  data-showcase-slide
+                  aria-roledescription="slide"
+                  aria-label={`${index + 1} of ${allPhotos.length}`}
+                  aria-hidden={index === 0 ? "false" : "true"}
+                >
+                  <Image
+                    src={photo.image}
+                    alt={photo.alt}
+                    widths={[440, 660, 880]}
+                    sizes="(max-width: 680px) calc(100vw - 3rem), 27rem"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                  <figcaption class="hero-showcase__caption">
+                    <span class="hero-showcase__caption-title">{photo.title}</span>
+                    <span class="hero-showcase__caption-meta">{photo.year} · Moment {(index + 1).toString().padStart(2, "0")}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <div class="hero-showcase__hud" aria-hidden="true">
+              <span class="hero-showcase__chip">Life in the lab</span>
+              <span class="hero-showcase__counter">
+                <strong data-showcase-index>01</strong>
+                <em>/</em>
+                <span>{allPhotos.length.toString().padStart(2, "0")}</span>
+              </span>
+            </div>
+
+            <button class="hero-showcase__nav hero-showcase__nav--prev" type="button" data-showcase-prev aria-label="Previous photo">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button class="hero-showcase__nav hero-showcase__nav--next" type="button" data-showcase-next aria-label="Next photo">
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <div class="hero-showcase__rail" data-showcase-rail aria-label="Choose a photo">
+              {allPhotos.map((_, index) => (
+                <button
+                  type="button"
+                  data-showcase-step
+                  aria-label={`View photo ${index + 1} of ${allPhotos.length}`}
+                  aria-current={index === 0 ? "true" : "false"}
+                ><span></span></button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-showcase__footer">
+          <a class="hero-showcase__link" href="/photos/">See every photo <span aria-hidden="true">↗</span></a>
+          <span class="hero-showcase__hint" aria-hidden="true">Scroll · Drag</span>
+        </div>
+
+        <p class="visually-hidden" data-showcase-status aria-live="polite"></p>
+      </div>
     </div>
     <div class="shell hero__footer">
       <span>Korea University</span>
@@ -134,6 +210,183 @@ const campusBackground = await getImage({
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  /**
+   * Hero photo slideshow. Every photo from the Photos page rides one track:
+   * it advances itself every 5s and yields to the reader on scroll, drag,
+   * arrow keys, or the dots. Autoplay only resumes once the pointer leaves.
+   */
+  const showcase = document.querySelector<HTMLElement>("[data-hero-showcase]");
+  const showcaseTrack = showcase?.querySelector<HTMLElement>("[data-showcase-track]");
+  const showcaseViewport = showcase?.querySelector<HTMLElement>("[data-showcase-viewport]");
+
+  if (showcase && showcaseTrack && showcaseViewport) {
+    const slides = Array.from(showcase.querySelectorAll<HTMLElement>("[data-showcase-slide]"));
+    const steps = Array.from(showcase.querySelectorAll<HTMLButtonElement>("[data-showcase-step]"));
+    const previous = showcase.querySelector<HTMLButtonElement>("[data-showcase-prev]");
+    const next = showcase.querySelector<HTMLButtonElement>("[data-showcase-next]");
+    const status = showcase.querySelector<HTMLElement>("[data-showcase-status]");
+    const indexLabel = showcase.querySelector<HTMLElement>("[data-showcase-index]");
+    const interval = Number(showcase.dataset.autoplay) || 5000;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    let current = 0;
+    let timer: number | undefined;
+    let paused = false;
+    let dragStart: number | null = null;
+    let dragDelta = 0;
+    let wheelLock = 0;
+
+    /** The active rail segment fills over one autoplay beat, so the 5s tick is visible. */
+    const restartProgress = () => {
+      const active = steps[current];
+      if (!active) return;
+
+      showcase.classList.remove("is-counting");
+      void showcase.offsetWidth;
+      if (!paused && !reduceMotion.matches && slides.length > 1) showcase.classList.add("is-counting");
+    };
+
+    /** Slides wrap, so the hero never dead-ends on the first or last photo. */
+    const render = (index: number, announce = true) => {
+      current = (index + slides.length) % slides.length;
+      showcaseTrack.style.transform = `translate3d(${-current * 100}%, 0, 0)`;
+
+      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", i === current ? "false" : "true"));
+      steps.forEach((step, i) => {
+        step.setAttribute("aria-current", i === current ? "true" : "false");
+        step.classList.toggle("is-seen", i < current);
+      });
+
+      if (indexLabel) indexLabel.textContent = (current + 1).toString().padStart(2, "0");
+      if (status && announce) status.textContent = `Photo ${current + 1} of ${slides.length}`;
+
+      restartProgress();
+    };
+
+    const stop = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
+    };
+
+    const play = () => {
+      stop();
+      if (paused || reduceMotion.matches || slides.length < 2) return;
+      timer = window.setInterval(() => render(current + 1, false), interval);
+    };
+
+    /** Any manual move restarts the clock so the photo gets its full 5s. */
+    const goTo = (index: number) => {
+      render(index);
+      play();
+    };
+
+    render(0, false);
+
+    if (slides.length > 1) {
+      previous?.addEventListener("click", () => goTo(current - 1));
+      next?.addEventListener("click", () => goTo(current + 1));
+      steps.forEach((step, index) => step.addEventListener("click", () => goTo(index)));
+
+      showcaseViewport.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goTo(current - 1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(current + 1);
+        }
+      });
+
+      /* Wheel and trackpad gestures step through photos. The page keeps its own
+         scroll: we only swallow the event while a gesture is actually advancing. */
+      showcaseViewport.addEventListener("wheel", (event) => {
+        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+        if (Math.abs(delta) < 8) return;
+
+        const now = event.timeStamp;
+        if (now - wheelLock < 420) {
+          event.preventDefault();
+          return;
+        }
+
+        wheelLock = now;
+        event.preventDefault();
+        goTo(current + (delta > 0 ? 1 : -1));
+      }, { passive: false });
+
+      const finishDrag = (event: PointerEvent) => {
+        if (dragStart === null) return;
+
+        const threshold = Math.min(90, showcaseViewport.clientWidth * 0.16);
+        const moved = Math.abs(dragDelta) > threshold;
+        const target = moved ? current + (dragDelta < 0 ? 1 : -1) : current;
+
+        if (showcaseViewport.hasPointerCapture(event.pointerId)) {
+          showcaseViewport.releasePointerCapture(event.pointerId);
+        }
+
+        dragStart = null;
+        dragDelta = 0;
+        showcase.classList.remove("is-dragging");
+        goTo(target);
+      };
+
+      showcaseViewport.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        if ((event.target as HTMLElement).closest("button, a")) return;
+
+        dragStart = event.clientX;
+        dragDelta = 0;
+        showcaseViewport.setPointerCapture(event.pointerId);
+        showcase.classList.add("is-dragging");
+      });
+
+      showcaseViewport.addEventListener("pointermove", (event) => {
+        if (dragStart === null) return;
+        dragDelta = event.clientX - dragStart;
+        showcaseTrack.style.transform = `translate3d(calc(${-current * 100}% + ${dragDelta}px), 0, 0)`;
+      });
+
+      showcaseViewport.addEventListener("pointerup", finishDrag);
+      showcaseViewport.addEventListener("pointercancel", finishDrag);
+      showcaseViewport.addEventListener("dragstart", (event) => event.preventDefault());
+
+      const pause = () => {
+        paused = true;
+        stop();
+        showcase.classList.remove("is-counting");
+      };
+      const resume = () => {
+        paused = false;
+        play();
+        restartProgress();
+      };
+
+      showcase.addEventListener("pointerenter", pause);
+      showcase.addEventListener("pointerleave", resume);
+      showcase.addEventListener("focusin", pause);
+      showcase.addEventListener("focusout", (event) => {
+        if (!showcase.contains(event.relatedTarget as Node)) resume();
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stop();
+          showcase.classList.remove("is-counting");
+        } else {
+          play();
+          restartProgress();
+        }
+      });
+
+      reduceMotion.addEventListener("change", play);
+      play();
+    }
+  }
+</script>
 
 <script>
   /**
