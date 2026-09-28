@@ -213,7 +213,7 @@ export const publications: Publication[] = [
   },
   {
     title: "PAVE: Mitigating Non-Congestive Delay for Seamless Video Calls over NextG Mobile Networks",
-    authors: "Goodsol Lee, Seyeon Kim, Juheon Yi, Junhong Min, Sangtae Ha, Kyunghan Lee, Saewoong Bahk, Tuan Tran",
+    authors: "Goodsol Lee, Seyeon Kim, Juheon Yi, Junhong Min, Tuan Tran, Sangtae Ha, Kyunghan Lee, Saewoong Bahk",
     venue: "IEEE INFOCOM",
     year: 2026,
     type: "Conference",
