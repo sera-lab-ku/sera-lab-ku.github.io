@@ -177,14 +177,14 @@ const campusBackground = await getImage({
       <SectionHeading
         eyebrow="Selected work"
         title="Recent papers."
-        copy="Work from the lab and our collaborators, at systems and networking venues."
+        copy="Work from the lab and our collaborators, at systems, networking, and machine learning venues."
         link={{ href: "/publications/", label: "Browse publications" }}
       />
       <div class="featured-publications">
         {featuredPublications.map((paper, index) => (
           <article class={`featured-paper featured-paper--${index + 1}`}>
             <div class="featured-paper__image-wrap">
-              {paper.image && <img src={paper.image} alt="" loading="lazy" />}
+              {paper.image && <img src={paper.image} alt="" loading="lazy" style={paper.imageFit ? `object-fit: ${paper.imageFit}; background: white;` : undefined} />}
               <span>{paper.year}</span>
             </div>
             <div class="featured-paper__content">

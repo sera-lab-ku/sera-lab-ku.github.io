@@ -8,6 +8,7 @@ export type Publication = {
   year: number;
   type: "Conference" | "Journal" | "Workshop" | "Magazine";
   image?: string;
+  imageFit?: "contain";
   link?: string;
   note?: string;
   areas?: AreaId[];
@@ -92,6 +93,7 @@ export const researchAreas: {
 export const newsPageSize = 8;
 
 export const news: NewsItem[] = [
+  { date: "2026.09", label: "Publication", title: "NPUsper has been accepted to NeurIPS 2026! Congratulations to Hojeong Lee, Sihyeon Lee, and Sungwon Woo! A particularly impressive achievement: Sihyeon and Sungwon carried out this work during their undergraduate research internships.", venues: ["NeurIPS 2026"] },
   { date: "2026.08", label: "Community", title: "Three master’s students joined the lab." },
   { date: "2026.07", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
   { date: "2026.07", label: "Community", title: "Two research interns joined the lab." },
@@ -176,6 +178,18 @@ export const people: Person[] = [
 ];
 
 export const publications: Publication[] = [
+  {
+    title: "NPUsper: Eliminating Redundant Computation for Real-Time Whisper on Mobile NPUs",
+    authors: "Hojeong Lee*, Sihyeon Lee*, Sungwon Woo, Chengpo Yan, Suman Banerjee, Seyeon Kim (* equal contribution)",
+    venue: "NeurIPS",
+    year: 2026,
+    type: "Conference",
+    image: "/assets/images/publications/npusper.png",
+    imageFit: "contain",
+    link: "/papers/npusper.pdf",
+    note: "Accepted",
+    areas: ["edge"]
+  },
   {
     title: "DeepSFU: Scalable Deepfake Detection for Video Conferencing",
     venue: "ACM SIGCOMM",
