@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="SERA Meeting Assistant — Privacy Policy" description="SERA Meeting Assistant의 Google Calendar 및 Slack 데이터 처리 안내">
+  <article class="shell privacy" lang="ko">
+    <p class="eyebrow">SERA Meeting Assistant</p>
+    <h1>개인정보처리방침</h1>
+    <p>시행일: 2026년 9월 28일 · 운영자: SERA Lab, Seyeon Kim</p>
+    <p>이 방침은 SERA LAB Slack에서 미팅 가능한 시간을 안내하는 SERA Meeting Assistant에 적용됩니다.</p>
+
+    <h2>처리하는 정보와 목적</h2>
+    <p>Google Calendar의 바쁨/비어 있음 정보와 시간 구간을 조회하여 미팅 가능 여부를 계산합니다. 현재 미팅 안내 기능은 일정 제목, 설명, 장소, 참석자 정보를 조회하지 않습니다. 캘린더 식별자와 Google 인증 토큰은 캘린더 연결을 유지하는 데 사용합니다.</p>
+    <p>Slack에서 봇에게 보낸 메시지, 사용자·워크스페이스·대화 식별자, 요청한 날짜와 시간, 미팅 길이, 버튼 동작 및 처리 상태를 요청 처리, 대화 이어가기, 중복 처리 방지와 장애 복구 목적으로 처리합니다. 민감한 개인정보는 봇 대화에 입력하지 마세요.</p>
+
+    <h2>Google 접근 권한</h2>
+    <p>캘린더의 일정 가능 여부를 확인하는 권한과 이 앱이 만든 캘린더에 접근하는 권한을 사용합니다. 앱이 만든 캘린더 권한에는 해당 캘린더 생성 및 일정 관리 권한이 포함되지만, 현재 학생 미팅 안내 경로는 바쁨/비어 있음 조회만 수행하며 일정을 자동 등록하지 않습니다.</p>
+
+    <h2>공유와 사용 제한</h2>
+    <p>학생에게는 요청 범위의 가능한 시간대 또는 가능 여부를 Slack으로 제공합니다. 기존 일정의 내용과 Google 인증 토큰은 학생에게 제공하지 않습니다. 학생이 교수님에게 보낼 미팅 요청은 학생이 직접 전송합니다.</p>
+    <p>Google 및 Slack API를 서비스 제공에 사용하며, 각 플랫폼에서도 자체 정책에 따라 데이터를 처리할 수 있습니다. 이 미팅 시간 확인 기능은 외부 생성형 AI 모델에 메시지나 캘린더 정보를 전송하지 않습니다. Google 사용자 데이터를 판매하거나 광고에 이용하거나 범용 AI 모델 학습에 이용하지 않습니다.</p>
+    <p>SERA Meeting Assistant의 Google API 수신 정보 사용 및 다른 앱으로의 전송은 Limited Use 요건을 포함한 <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>를 따릅니다.</p>
+
+    <h2>보관과 보호</h2>
+    <p>인증 토큰, 설정, 요청 처리 기록과 대화 초안은 운영자가 관리하는 실행 장치에 보관합니다. 인증 파일 접근 권한을 제한하며, 운영 로그에 인증 토큰이나 학생 메시지 본문을 기록하지 않도록 구성합니다. 운영자는 지원·유지보수에 필요한 범위에서 저장된 기록에 접근할 수 있습니다.</p>
+    <p>현재 요청 처리 기록에는 자동 삭제 기한이 설정되어 있지 않습니다. 삭제 요청 시 운영자가 해당 기록을 확인하여 삭제합니다. 대화 초안은 30분이 지나면 대화 이어가기에 사용하지 않지만, 이것이 저장 기록의 자동 삭제를 뜻하지는 않습니다. Slack에 남은 메시지는 워크스페이스의 보관 정책과 삭제 기능을 따릅니다.</p>
+
+    <h2>연결 해제와 삭제 요청</h2>
+    <p>캘린더 소유자는 <a href="https://myaccount.google.com/connections">Google 계정의 연결 관리</a>에서 앱 접근 권한을 철회할 수 있습니다. 권한을 철회하면 캘린더 조회가 중단됩니다. 앱에 보관된 인증 정보나 요청 기록의 열람·삭제·처리 중단은 <a href="mailto:seyeon625@gmail.com">seyeon625@gmail.com</a>으로 요청해 주세요. 본인 확인 후 필요한 조치를 진행합니다.</p>
+    <p>기능이나 데이터 처리 방식이 변경되면 이 페이지와 시행일을 업데이트합니다.</p>
+    <p><a href="/meeting-assistant/">SERA Meeting Assistant 안내로 돌아가기</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .privacy { max-width: 56rem; padding-block: 5rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 2rem; }
+  h2 { font-size: 1.4rem; margin-top: 2.5rem; }
+  p { line-height: 1.85; margin-block: 1.25rem; }
+  a { text-decoration: underline; overflow-wrap: anywhere; }
+</style>

@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="SERA Meeting Assistant" description="SERA Lab의 Slack 미팅 시간 확인 도우미와 개인정보 처리 안내">
+  <article class="shell assistant-info" lang="ko">
+    <p class="eyebrow">SERA Lab · Slack</p>
+    <h1>SERA Meeting Assistant</h1>
+    <p>학생이 SERA LAB Slack에서 원하는 날짜와 시간을 제안하면 교수님의 Google Calendar를 조회해 가능한 시간대를 알려주는 도우미입니다.</p>
+    <p>예를 들어 “화요일 가능한 시간 모두 알려줘” 또는 “다음 주 오후에 1시간 미팅하고 싶어”라고 물어보세요. 가능한 시간을 고른 뒤 안내된 문장을 복사해 교수님께 직접 DM으로 문의하면 됩니다.</p>
+    <p>봇은 일정 제목, 설명, 장소, 참석자를 학생에게 공개하지 않습니다. 가능한 시간은 조회 당시의 정보이며 예약을 보장하지 않습니다. 현재 봇은 미팅을 자동 등록하거나 승인 요청을 보내지 않습니다.</p>
+    <p>Google 계정 연결은 캘린더 소유자가 진행합니다. 학생은 자신의 Google 계정을 연결할 필요가 없습니다.</p>
+    <p><a href="/meeting-assistant-privacy/">개인정보처리방침 · Privacy Policy</a></p>
+    <p>문의: <a href="mailto:seyeon625@gmail.com">seyeon625@gmail.com</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .assistant-info { max-width: 56rem; padding-block: 5rem; }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 2rem; }
+  p { line-height: 1.85; margin-block: 1.25rem; }
+  a { text-decoration: underline; }
+</style>
