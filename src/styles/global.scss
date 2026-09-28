@@ -523,13 +523,10 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .news-item h3 { font-size: clamp(0.95rem, 1.6vw, 1.16rem); letter-spacing: var(--tracking-heading); }
 .news-item__venue { color: var(--crimson-bright); font-weight: 700; }
 .news-item:hover .news-item__venue { color: var(--acid); }
-.news-item__person { font-weight: 700; }
-.news-item__person--teal { color: #0f5563; }
-.news-item__person--purple { color: #643c83; }
-.news-item__person--brown { color: #80500e; }
-.news-item:hover .news-item__person--teal { color: #a5f3ef; }
-.news-item:hover .news-item__person--purple { color: #e9d5ff; }
-.news-item:hover .news-item__person--brown { color: #ffe2a8; }
+.news-item__person { color: #0f5563; font-weight: 700; }
+.news-item__paper { color: #643c83; font-weight: 700; }
+.news-item:hover .news-item__person { color: #a5f3ef; }
+.news-item:hover .news-item__paper { color: #e9d5ff; }
 
 .news-item__arrow { font-size: 1.2rem; }
 .join-banner { padding: 1.3rem 0; color: var(--paper-white); background: var(--crimson); }

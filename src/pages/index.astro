@@ -134,7 +134,8 @@ const campusBackground = await getImage({
             <span class="news-item__label">{item.label}</span>
             <h3>{splitNewsTitle(item).map((segment) => (
               segment.venue ? <span class="news-item__venue">{segment.text}</span>
-                : segment.personColor ? <span class={`news-item__person news-item__person--${segment.personColor}`}>{segment.text}</span>
+                : segment.person ? <span class="news-item__person">{segment.text}</span>
+                : segment.paper ? <span class="news-item__paper">{segment.text}</span>
                 : segment.text
             ))}</h3>
             <span class="news-item__arrow" aria-hidden="true">↗</span>

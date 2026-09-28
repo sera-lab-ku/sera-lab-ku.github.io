@@ -20,7 +20,8 @@ export type NewsItem = {
   title: string;
   /** Substrings of `title` rendered in the accent colour (venues, awards). */
   venues?: string[];
-  people?: { names: string[]; color: "teal" | "purple" | "brown" }[];
+  people?: string[];
+  papers?: string[];
 };
 
 export type Person = {
@@ -94,7 +95,7 @@ export const researchAreas: {
 export const newsPageSize = 8;
 
 export const news: NewsItem[] = [
-  { date: "2026.09", label: "Publication", title: "NPUsper has been accepted to NeurIPS 2026! Congratulations to Hojeong Lee, Sihyeon Lee, and Sungwon Woo! Sihyeon and Sungwon carried out this work during their undergraduate research internships.", venues: ["NeurIPS 2026"], people: [{ names: ["Hojeong Lee"], color: "teal" }, { names: ["Sihyeon Lee", "Sihyeon"], color: "purple" }, { names: ["Sungwon Woo", "Sungwon"], color: "brown" }] },
+  { date: "2026.09", label: "Publication", title: "NPUsper has been accepted to NeurIPS 2026! Congratulations to Hojeong Lee, Sihyeon Lee, and Sungwon Woo! Sihyeon and Sungwon carried out this work during their undergraduate research internships.", venues: ["NeurIPS 2026"], people: ["Hojeong Lee", "Sihyeon Lee", "Sungwon Woo", "Sihyeon", "Sungwon"], papers: ["NPUsper"] },
   { date: "2026.08", label: "Community", title: "Three master’s students joined the lab." },
   { date: "2026.07", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
   { date: "2026.07", label: "Community", title: "Two research interns joined the lab." },
@@ -109,13 +110,14 @@ export const news: NewsItem[] = [
 ];
 
 /**
- * Splits a news title into plain and accented segments so venue names can be
+ * Splits a news title into plain and accented segments so paper, venue, and student names can be
  * highlighted without embedding markup in the data.
  */
-export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean; personColor?: "teal" | "purple" | "brown" }[] {
+export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean; person?: boolean; paper?: boolean }[] {
   const venues = item.venues ?? [];
   const people = item.people ?? [];
-  const terms = [...venues, ...people.flatMap((person) => person.names)]
+  const papers = item.papers ?? [];
+  const terms = [...venues, ...people, ...papers]
     .sort((a, b) => b.length - a.length);
   if (terms.length === 0) return [{ text: item.title, venue: false }];
   const pattern = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
@@ -125,7 +127,8 @@ export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean; 
     .map((segment) => ({
       text: segment,
       venue: venues.includes(segment),
-      personColor: people.find((person) => person.names.includes(segment))?.color
+      person: people.includes(segment),
+      paper: papers.includes(segment)
     }));
 }
 
