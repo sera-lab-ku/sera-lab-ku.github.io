@@ -20,6 +20,7 @@ export type NewsItem = {
   title: string;
   /** Substrings of `title` rendered in the accent colour (venues, awards). */
   venues?: string[];
+  people?: { names: string[]; color: "teal" | "purple" | "brown" }[];
 };
 
 export type Person = {
@@ -93,7 +94,7 @@ export const researchAreas: {
 export const newsPageSize = 8;
 
 export const news: NewsItem[] = [
-  { date: "2026.09", label: "Publication", title: "NPUsper has been accepted to NeurIPS 2026! Congratulations to Hojeong Lee, Sihyeon Lee, and Sungwon Woo! A particularly impressive achievement: Sihyeon and Sungwon carried out this work during their undergraduate research internships.", venues: ["NeurIPS 2026"] },
+  { date: "2026.09", label: "Publication", title: "NPUsper has been accepted to NeurIPS 2026! Congratulations to Hojeong Lee, Sihyeon Lee, and Sungwon Woo! Sihyeon and Sungwon carried out this work during their undergraduate research internships.", venues: ["NeurIPS 2026"], people: [{ names: ["Hojeong Lee"], color: "teal" }, { names: ["Sihyeon Lee", "Sihyeon"], color: "purple" }, { names: ["Sungwon Woo", "Sungwon"], color: "brown" }] },
   { date: "2026.08", label: "Community", title: "Three master’s students joined the lab." },
   { date: "2026.07", label: "Publication", title: "A new paper was accepted to ACM SIGCOMM 2026.", venues: ["ACM SIGCOMM 2026"] },
   { date: "2026.07", label: "Community", title: "Two research interns joined the lab." },
@@ -111,14 +112,21 @@ export const news: NewsItem[] = [
  * Splits a news title into plain and accented segments so venue names can be
  * highlighted without embedding markup in the data.
  */
-export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean }[] {
+export function splitNewsTitle(item: NewsItem): { text: string; venue: boolean; personColor?: "teal" | "purple" | "brown" }[] {
   const venues = item.venues ?? [];
-  if (venues.length === 0) return [{ text: item.title, venue: false }];
-  const pattern = venues.map((venue) => venue.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  const people = item.people ?? [];
+  const terms = [...venues, ...people.flatMap((person) => person.names)]
+    .sort((a, b) => b.length - a.length);
+  if (terms.length === 0) return [{ text: item.title, venue: false }];
+  const pattern = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   return item.title
     .split(new RegExp(`(${pattern})`))
     .filter((segment) => segment.length > 0)
-    .map((segment) => ({ text: segment, venue: venues.includes(segment) }));
+    .map((segment) => ({
+      text: segment,
+      venue: venues.includes(segment),
+      personColor: people.find((person) => person.names.includes(segment))?.color
+    }));
 }
 
 export const people: Person[] = [
@@ -192,14 +200,17 @@ export const publications: Publication[] = [
   },
   {
     title: "DeepSFU: Scalable Deepfake Detection for Video Conferencing",
+    authors: "Tuan Tran, Shirin Ebadi, S. M. H. Hosseini, Woongsub Shin, Evan Ram, Youngwook Son, Seyeon Kim, Nam Bui, Kyunghan Lee, Eric Keller, Sangtae Ha",
     venue: "ACM SIGCOMM",
     year: 2026,
     type: "Conference",
     image: "/assets/images/publications/deepsfu.png",
+    link: "https://doi.org/10.1145/3789240.3829184",
     areas: ["net"]
   },
   {
     title: "PAVE: Mitigating Non-Congestive Delay for Seamless Video Calls over NextG Mobile Networks",
+    authors: "Goodsol Lee, Seyeon Kim, Juheon Yi, Junhong Min, Sangtae Ha, Kyunghan Lee, Saewoong Bahk, Tuan Tran",
     venue: "IEEE INFOCOM",
     year: 2026,
     type: "Conference",
@@ -209,6 +220,7 @@ export const publications: Publication[] = [
   },
   {
     title: "eXpressSFU: Toward Super-Scalable Video Conferencing with SmartNICs",
+    authors: "Tuan Tran, S. M. H. Hosseini, Seyeon Kim, Kyunghan Lee, Nam Bui, Dirk Grunwald, Sangtae Ha",
     venue: "USENIX NSDI",
     year: 2026,
     type: "Conference",
@@ -218,6 +230,7 @@ export const publications: Publication[] = [
   },
   {
     title: "QCON: Seamless QoE-Aware 5G Streaming via Multi-Connectivity",
+    authors: "Goodsol Lee, Junhong Min, Seyeon Kim, Juheon Yi, Kwang Taik Kim, Mung Chiang, Sangtae Ha, Kyunghan Lee, Saewoong Bahk",
     venue: "USENIX NSDI",
     year: 2026,
     type: "Conference",
