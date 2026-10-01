@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
+import { applicationFormUrl } from "../data/site";
 ---
 
 <BaseLayout title="Join us — SERA Lab." description="Join SERA Lab at Korea University.">
@@ -38,7 +39,7 @@ import PageIntro from "../components/PageIntro.astro";
       <div class="application-flow__actions">
         <a
           class="button button--light"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSeAnj70hrt7R7Asfrycud-yz-zSpkPSczDkFA2dOMluAJ-hdg/viewform?usp=dialog"
+          href={applicationFormUrl}
           target="_blank"
           rel="noopener noreferrer"
         >Apply via Google Form <span aria-hidden="true">↗</span></a>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
+import { applicationFormUrl } from "../data/site";
 ---
 
 <BaseLayout title="Contact — SERA Lab." description="Contact SERA Lab at Korea University.">
@@ -23,6 +24,20 @@ import PageIntro from "../components/PageIntro.astro";
       <div class="contact-card">
         <span class="eyebrow">Office</span>
         <p>Room 501A<br />Woojung Hall of Informatics<br />Korea University, Seoul</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-apply-section" aria-labelledby="contact-apply-title">
+    <div class="shell contact-apply">
+      <div class="contact-apply__copy">
+        <p class="eyebrow">Join SERA · Recruiting year-round</p>
+        <h2 id="contact-apply-title">Your next research starts here.</h2>
+        <p>Interested in joining as a graduate student or undergraduate researcher? Tell us about your interests through our application form. No prior email needed.</p>
+      </div>
+      <div class="contact-apply__actions">
+        <a class="button button--light" href={applicationFormUrl} target="_blank" rel="noopener noreferrer">Apply via Google Form <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="/join/">Explore opportunities <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>

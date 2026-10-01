@@ -1076,6 +1076,18 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
 .contact-card--primary a span { color: var(--acid); }
 .contact-card--primary a:hover { color: var(--acid); }
 .contact-map-section { padding-top: 0; }
+.contact-apply-section { padding-top: 0; }
+.contact-apply { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: center; padding: clamp(1.5rem, 3vw, 2.5rem); color: var(--paper-white); background: var(--crimson); border-top: 3px solid var(--acid); }
+.contact-apply .eyebrow { color: var(--acid); margin-bottom: 0.65rem; }
+.contact-apply h2 { max-width: 35rem; font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.7rem); font-weight: 400; line-height: 1.1; }
+.contact-apply__copy > p:last-child { max-width: 38rem; margin-top: 0.8rem; color: rgba(255,255,255,0.85); font-size: 0.95rem; line-height: 1.65; }
+.contact-apply__actions { display: grid; gap: 1rem; justify-items: start; }
+.contact-apply__actions .text-link { color: var(--paper-white); }
+.contact-apply__actions a:focus-visible { outline: 2px solid var(--acid); outline-offset: 5px; }
+@media (max-width: 680px) {
+  .contact-apply { grid-template-columns: minmax(0, 1fr); gap: 1.35rem; }
+  .contact-apply__actions .button { width: 100%; }
+}
 .contact-map { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(21rem, 1.05fr); min-height: 28rem; overflow: hidden; color: var(--paper-white); background: var(--ink); }
 .contact-map__copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(1.6rem, 4vw, 3.4rem); }
 .contact-map__copy h2 { max-width: 28rem; font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4.2rem); font-weight: 400; letter-spacing: var(--tracking-display); line-height: 0.95; }

@@ -33,6 +33,8 @@ export type Person = {
   email?: string;
 };
 
+export const applicationFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeAnj70hrt7R7Asfrycud-yz-zSpkPSczDkFA2dOMluAJ-hdg/viewform?usp=dialog";
+
 export const navigation = [
   { label: "Research", href: "/research/" },
   { label: "People", href: "/people/" },
