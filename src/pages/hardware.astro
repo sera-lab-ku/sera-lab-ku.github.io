@@ -5,6 +5,8 @@ import PageIntro from "../components/PageIntro.astro";
 import vivobook from "../../photo/hardware/asus-vivobook-s15.jpg";
 import devKit from "../../photo/hardware/open-q-8550cs-dev-kit.jpg";
 import galaxy from "../../photo/hardware/galaxy-s25.jpg";
+import personalComputer from "../../photo/hardware/personal-computer.jpg";
+import researchWorkstation from "../../photo/hardware/research-workstation.jpg";
 
 const hardware = [
   {
@@ -13,6 +15,20 @@ const hardware = [
     type: "Mobile device",
     description: "Our mobile device for on-device experiments and real-world system evaluation.",
     specs: ["Galaxy S25", "Android"]
+  },
+  {
+    image: personalComputer,
+    name: "Personal Computer",
+    type: "Desktop computer",
+    description: "Our desktop machine for model training, simulation, and other compute-heavy experiments.",
+    specs: ["AMD Ryzen 7 9800X3D", "NVIDIA GeForce RTX 5080", "64 GB DDR5-5600", "2 TB NVMe SSD"]
+  },
+  {
+    image: researchWorkstation,
+    name: "Research Workstation",
+    type: "Shared lab server",
+    description: "A server computer shared across the lab for long-running jobs and storage.",
+    specs: []
   },
   {
     image: devKit,
@@ -36,7 +52,7 @@ const hardware = [
   <PageIntro
     eyebrow="Hardware"
     title="The devices behind our experiments."
-    copy="Mobile, edge, and personal computing devices used to build and evaluate practical systems."
+    copy="Mobile, edge, desktop, and server-class machines used to build and evaluate practical systems."
   />
 
   <section class="section section--paper hardware-page">
@@ -65,9 +81,11 @@ const hardware = [
               </div>
               <h2>{item.name}</h2>
               <p>{item.description}</p>
-              <ul class="hardware-item__specs" aria-label={`${item.name} specifications`}>
-                {item.specs.map((spec) => <li>{spec}</li>)}
-              </ul>
+              {item.specs.length > 0 && (
+                <ul class="hardware-item__specs" aria-label={`${item.name} specifications`}>
+                  {item.specs.map((spec) => <li>{spec}</li>)}
+                </ul>
+              )}
             </div>
           </article>
         ))}
