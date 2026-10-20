@@ -1,4 +1,5 @@
 import type { ImageMetadata } from "astro";
+import ictAiTechDay from "../../photo/2026/ict-ai-tech-day-2026.jpg";
 import labGroupTigerStatue from "../../photo/2026/lab-group-tiger-statue-2026.jpg";
 import collaborationWorkshop01 from "../../photo/2026/icnl-sera-workshop-2026.webp";
 import collaborationWorkshop02 from "../../photo/2026/icnl-sera-workshop-2026-02.webp";
@@ -28,6 +29,13 @@ export type PhotoYear = {
 export const photoYears: PhotoYear[] = [{
   year: 2026,
   posts: [
+    {
+      title: "ICT AI TECH DAY",
+      photos: [{
+        image: ictAiTechDay,
+        alt: "A SERA Lab member giving a thumbs up at the lab booth during ICT AI TECH DAY, with the NPUsper and BlockStream posters behind"
+      }]
+    },
     {
       title: "연구실 단체 사진 (feat. 호랑이 동상)",
       photos: [{
