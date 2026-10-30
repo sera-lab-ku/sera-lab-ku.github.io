@@ -39,6 +39,7 @@ export const navigation = [
   { label: "Research", href: "/research/" },
   { label: "People", href: "/people/" },
   { label: "Publications", href: "/publications/" },
+  { label: "Patents", href: "/patents/" },
   { label: "Join us", href: "/join/" },
   { label: "Hardware", href: "/hardware/" },
   { label: "Photos", href: "/photos/" }

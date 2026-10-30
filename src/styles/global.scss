@@ -1118,10 +1118,8 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .research-card:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
 }
 
-@media (max-width: 900px) {
-  .shell { width: min(100% - 2.5rem, 1180px); }
-  /* The enlarged nav type no longer fits beside the brand below this width,
-     so the links collapse into the toggle menu here rather than at 680px. */
+@media (max-width: 980px) {
+  /* Keep the expanded navigation clear of the brand on narrow screens. */
   .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 0.75rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0; pointer-events: none; background: var(--ink); transform: translateY(-0.8rem); transition: opacity 180ms ease, transform 180ms ease; }
   .site-header.is-menu-open .site-nav { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .site-nav__link { padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 1.35rem; }
@@ -1131,6 +1129,10 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .menu-toggle span { display: block; height: 1px; background: currentColor; transition: transform 180ms ease; }
   .site-header.is-menu-open .menu-toggle span:first-child { transform: translateY(0.18rem) rotate(45deg); }
   .site-header.is-menu-open .menu-toggle span:last-child { transform: translateY(-0.18rem) rotate(-45deg); }
+}
+
+@media (max-width: 900px) {
+  .shell { width: min(100% - 2.5rem, 1180px); }
   .hero { min-height: auto; }
   .hero--campus { min-height: auto; }
   .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; padding-top: 10rem; padding-bottom: 7rem; }

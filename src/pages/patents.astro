@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { patents } from "../data/patents";
+
+const years = [...new Set(patents.map((patent) => patent.filed.slice(0, 4)))];
+---
+
+<BaseLayout title="Patents — SERA Lab." description="Patent applications in mobile AI, immersive streaming, wireless networking, and system performance from Seyeon Kim's research.">
+  <div class="page-nav-band" aria-hidden="true"></div>
+  <section class="section section--paper patents-page">
+    <div class="shell">
+      <header class="content-divider"><h1>Patents</h1></header>
+      <div class="patent-intro">
+        <div>
+          <p class="eyebrow">Ideas into inventions</p>
+          <h2>From systems research<br />to practical inventions.</h2>
+          <p class="patent-intro__copy">Mobile AI, immersive streaming, wireless networks, and device performance.</p>
+        </div>
+        <div class="patent-count">
+          <strong>{String(patents.length).padStart(2, "0")}</strong>
+          <span>Patent applications<small>Republic of Korea · KR</small></span>
+        </div>
+      </div>
+
+      {years.map((year) => (
+        <section class="patent-year" aria-labelledby={`patents-${year}`}>
+          <div class="patent-year__heading">
+            <h2 id={`patents-${year}`}>{year}</h2>
+            <span>{patents.filter((patent) => patent.filed.startsWith(year)).length} applications</span>
+          </div>
+          <div class="patent-grid">
+            {patents.filter((patent) => patent.filed.startsWith(year)).map((patent) => (
+              <article class="patent-card">
+                <div class="patent-card__top">
+                  <span class="patent-card__country">{patent.country} <span>Patent application</span></span>
+                  <span class="patent-card__status">{patent.status}</span>
+                </div>
+                <h3 lang={patent.language}>{patent.title}</h3>
+                <dl>
+                  <div><dt>Application no.</dt><dd>{patent.number}</dd></div>
+                  <div><dt>Filed</dt><dd><time datetime={patent.filed}>{patent.filed.replaceAll("-", ".")}</time></dd></div>
+                </dl>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+      <p class="patent-source">Application details and status as listed in Seyeon Kim’s CV.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .patent-intro { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 0 0 2rem; }
+  .patent-intro h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 400; line-height: 1.15; letter-spacing: var(--tracking-heading); }
+  .patent-intro .eyebrow { margin-bottom: 0.65rem; color: var(--crimson); }
+  .patent-intro__copy { margin-top: 0.8rem; max-width: 35rem; color: var(--ink-soft); font-size: 0.95rem; }
+  .patent-count { display: flex; align-items: center; gap: 1.2rem; flex-shrink: 0; padding-left: 2rem; border-left: 1px solid var(--line); }
+  .patent-count strong { font-family: var(--serif); color: var(--crimson); font-size: 4.5rem; line-height: 1; font-weight: 400; }
+  .patent-count span { font-weight: 600; font-size: 0.95rem; }
+  .patent-count small { display: block; margin-top: 0.35rem; color: var(--ink-soft); font-size: 0.78rem; font-weight: 400; }
+  .patent-year { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+  .patent-year__heading { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+  .patent-year__heading h2 { font-family: var(--serif); font-weight: 400; font-size: 2rem; }
+  .patent-year__heading > span { font-size: 0.7rem; font-family: var(--mono); color: var(--ink-soft); }
+  .patent-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .patent-card { display: flex; flex-direction: column; padding: clamp(1.25rem, 2.2vw, 1.8rem); border: 1px solid var(--line); border-top: 3px solid var(--crimson); background: var(--paper-white); }
+  .patent-card__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.65rem; align-items: center; margin-bottom: 1.15rem; }
+  .patent-card__country { color: var(--crimson); font-family: var(--mono); font-size: 0.7rem; font-weight: 500; }
+  .patent-card__country span { color: var(--ink-soft); margin-left: 0.5rem; font-size: 0.62rem; font-weight: 400; }
+  .patent-card__status { border: 1px solid var(--line); border-radius: 2rem; padding: 0.2rem 0.65rem; font-size: 0.7rem; color: var(--crimson); background: var(--paper); }
+  .patent-card h3 { font-size: clamp(1.05rem, 1.55vw, 1.22rem); font-weight: 600; line-height: 1.65; margin-bottom: 1.5rem; word-break: keep-all; overflow-wrap: anywhere; }
+  .patent-card dl { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.8rem 1.25rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .patent-card dt { font-size: 0.67rem; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .patent-card dd { margin: 0; font-family: var(--mono); font-size: 0.76rem; }
+  .patent-source { margin-top: 0.5rem; color: var(--ink-soft); font-size: 0.78rem; }
+  @media (max-width: 900px) {
+    .patent-intro { align-items: flex-start; flex-direction: column; gap: 1.25rem; }
+    .patent-count { padding-left: 0; border-left: 0; }
+    .patent-count strong { font-size: 3rem; }
+  }
+  @media (max-width: 680px) {
+    .patent-grid { grid-template-columns: 1fr; }
+  }
+</style>
