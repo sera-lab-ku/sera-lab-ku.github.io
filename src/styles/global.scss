@@ -1058,6 +1058,103 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   line-height: 1.25;
 }
 
+/* Hardware slideshow: an item with several photos rotates inside the same
+   4:3 frame. Arrows, the rail, arrow keys, or a swipe take over at any time,
+   and the rail fills across one autoplay beat so the timing stays visible. */
+.hardware-slides { position: relative; height: 100%; }
+.hardware-slides__viewport { height: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; }
+.hardware-slides__viewport:focus-visible { outline: 2px solid var(--crimson); outline-offset: -2px; }
+.hardware-slides__track { display: flex; height: 100%; transition: transform 620ms var(--ease); }
+.hardware-slides.is-dragging .hardware-slides__viewport { cursor: grabbing; }
+.hardware-slides.is-dragging .hardware-slides__track { transition: none; }
+.hardware-slides__slide { flex: 0 0 100%; min-width: 0; height: 100%; overflow: hidden; }
+.hardware-slides__slide img { -webkit-user-drag: none; user-select: none; }
+/* A soft shade under the rail keeps it legible on the pale desk photos. */
+.hardware-slides::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 22%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(10, 14, 19, 0.42), transparent);
+}
+.hardware-slides__counter {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 2;
+  padding: 0.32rem 0.6rem;
+  color: rgba(255,255,255,0.72);
+  border-radius: 999px;
+  background: rgba(10, 14, 19, 0.55);
+  backdrop-filter: blur(6px);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+.hardware-slides__counter strong { color: var(--paper-white); font-weight: 500; }
+.hardware-slides__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  color: var(--paper-white);
+  opacity: 0;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  background: rgba(10, 14, 19, 0.5);
+  backdrop-filter: blur(6px);
+  font-size: 0.86rem;
+  transform: translateY(-50%) scale(0.85);
+  transition: opacity 220ms ease, background 220ms ease, transform 220ms var(--ease);
+}
+.hardware-slides__nav--prev { left: 0.8rem; }
+.hardware-slides__nav--next { right: 0.8rem; }
+.hardware-slides:hover .hardware-slides__nav,
+.hardware-slides__nav:focus-visible { opacity: 1; transform: translateY(-50%) scale(1); }
+.hardware-slides__nav:hover { border-color: var(--crimson-bright); background: var(--crimson-bright); }
+.hardware-slides__nav:focus-visible { outline: 2px solid var(--acid); outline-offset: 2px; }
+.hardware-slides__rail {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.5rem;
+  left: 1rem;
+  z-index: 2;
+  display: flex;
+  gap: 0.3rem;
+}
+.hardware-slides__rail button { flex: 1; height: 1.2rem; padding: 0; background: transparent; }
+.hardware-slides__rail button span {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.42);
+}
+.hardware-slides__rail button:hover span { background: rgba(255,255,255,0.7); }
+.hardware-slides__rail button:focus-visible { outline: 2px solid var(--acid); outline-offset: -2px; }
+.hardware-slides__rail button span::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  content: "";
+  border-radius: 2px;
+  background: var(--acid);
+}
+.hardware-slides__rail button[aria-current="true"] span::after { width: 100%; }
+.hardware-slides.is-counting .hardware-slides__rail button[aria-current="true"] span::after { animation: showcase-progress var(--slides-autoplay) linear both; }
+/* Touch screens have no hover, so the arrows stay out. */
+@media (hover: none) {
+  .hardware-slides__nav { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
 /* Contact */
 .contact-page { padding-top: 0; }
 .contact-page__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--line); background: var(--line); }
@@ -1230,6 +1327,7 @@ body:has(.hero--campus, .page-intro--image) .site-header { text-shadow: 0 1px 8p
   .hardware-item { grid-template-columns: 1fr; gap: 2rem; padding: 2.4rem 0; }
   .hardware-item:nth-child(even) .hardware-item__image { order: 0; }
   .hardware-item__content { max-width: none; }
+  .hardware-slides__nav { opacity: 1; transform: translateY(-50%) scale(1); }
   .site-footer__grid { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 2.5rem; }
 }
 
