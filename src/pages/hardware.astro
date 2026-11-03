@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 import vivobook from "../../photo/hardware/asus-vivobook-s15.jpg";
@@ -7,31 +8,45 @@ import devKit from "../../photo/hardware/open-q-8550cs-dev-kit.jpg";
 import galaxy from "../../photo/hardware/galaxy-s25.jpg";
 import personalComputer from "../../photo/hardware/personal-computer.jpg";
 import researchWorkstation from "../../photo/hardware/research-workstation.jpg";
+import micArray from "../../photo/hardware/uma-16-microphone-array.jpg";
+import speakerRing from "../../photo/hardware/uma-16-speaker-ring.jpg";
 
-const hardware = [
+interface HardwareItem {
+  /** One photo renders as a still; two or more become a slideshow. */
+  photos: { src: ImageMetadata; alt?: string }[];
+  name: string;
+  type: string;
+  description: string;
+  specs: string[];
+}
+
+/** How long each slideshow photo stays up before advancing on its own. */
+const slideInterval = 5000;
+
+const hardware: HardwareItem[] = [
   {
-    image: galaxy,
+    photos: [{ src: galaxy }],
     name: "Samsung Galaxy S25",
     type: "Mobile device",
     description: "Our mobile device for on-device experiments and real-world system evaluation.",
     specs: ["Galaxy S25", "Android"]
   },
   {
-    image: personalComputer,
+    photos: [{ src: personalComputer }],
     name: "Personal Computer",
     type: "Desktop computer",
     description: "Our desktop machine for model training, simulation, and other compute-heavy experiments.",
     specs: ["AMD Ryzen 7 9800X3D", "NVIDIA GeForce RTX 5080", "64 GB DDR5-5600", "2 TB NVMe SSD"]
   },
   {
-    image: researchWorkstation,
+    photos: [{ src: researchWorkstation }],
     name: "Research Workstation",
     type: "Shared lab server",
     description: "A server computer shared across the lab for long-running jobs and storage.",
     specs: []
   },
   {
-    image: devKit,
+    photos: [{ src: devKit }],
     name: "Open-Q 8550CS SOM Development Kit",
     type: "Edge AI development kit",
     description:
@@ -39,11 +54,22 @@ const hardware = [
     specs: ["8-core CPU · up to 3.2 GHz", "16 GB LPDDR5x", "128 GB UFS", "Wi-Fi 7 · Bluetooth 5.3", "Android 13 · Yocto Linux"]
   },
   {
-    image: vivobook,
+    photos: [{ src: vivobook }],
     name: "ASUS Vivobook S 15",
     type: "Laptop",
     description: "A portable workstation for development, testing, and demonstrations.",
     specs: ["Vivobook S 15", "Copilot+ PC"]
+  },
+  {
+    photos: [
+      { src: micArray, alt: "miniDSP UMA-16 microphone array on a desk with USB speakers behind it" },
+      { src: speakerRing, alt: "UMA-16 microphone array at the center of a ring of USB speakers" }
+    ],
+    name: "Microphone Array & Speakers",
+    type: "Acoustic sensing setup",
+    description:
+      "A miniDSP UMA-16 16-channel USB microphone array, set up with a ring of USB speakers for multichannel audio capture and playback experiments.",
+    specs: ["miniDSP UMA-16", "16-channel MEMS microphone array", "USB speakers"]
   }
 ];
 ---
@@ -66,13 +92,78 @@ const hardware = [
         {hardware.map((item, index) => (
           <article class="hardware-item">
             <div class="hardware-item__image">
-              <Image
-                src={item.image}
-                alt={`${item.name} used at SERA Lab`}
-                widths={[640, 960, 1280]}
-                sizes="(max-width: 680px) 100vw, 52vw"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+              {item.photos.length > 1 ? (
+                <div
+                  class="hardware-slides"
+                  data-hardware-slides
+                  data-autoplay={slideInterval}
+                  style={`--slides-autoplay: ${slideInterval}ms`}
+                  role="group"
+                  aria-roledescription="carousel"
+                  aria-label={`${item.name} photos`}
+                >
+                  <div
+                    class="hardware-slides__viewport"
+                    data-slides-viewport
+                    tabindex="0"
+                    aria-label={`${item.name} photos. Swipe, drag, or use the left and right arrow keys to change photo.`}
+                  >
+                    <div class="hardware-slides__track" data-slides-track>
+                      {item.photos.map((photo, photoIndex) => (
+                        <div
+                          class="hardware-slides__slide"
+                          data-slides-slide
+                          role="group"
+                          aria-roledescription="slide"
+                          aria-label={`${photoIndex + 1} of ${item.photos.length}`}
+                          aria-hidden={photoIndex === 0 ? "false" : "true"}
+                        >
+                          <Image
+                            src={photo.src}
+                            alt={photo.alt ?? `${item.name} used at SERA Lab`}
+                            widths={[640, 960, 1280]}
+                            sizes="(max-width: 680px) 100vw, 52vw"
+                            loading={index === 0 && photoIndex === 0 ? "eager" : "lazy"}
+                            draggable="false"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <span class="hardware-slides__counter" aria-hidden="true">
+                    <strong data-slides-index>01</strong> / {item.photos.length.toString().padStart(2, "0")}
+                  </span>
+
+                  <button class="hardware-slides__nav hardware-slides__nav--prev" type="button" data-slides-prev aria-label="Previous photo">
+                    <span aria-hidden="true">←</span>
+                  </button>
+                  <button class="hardware-slides__nav hardware-slides__nav--next" type="button" data-slides-next aria-label="Next photo">
+                    <span aria-hidden="true">→</span>
+                  </button>
+
+                  <div class="hardware-slides__rail" aria-label="Choose a photo">
+                    {item.photos.map((_, photoIndex) => (
+                      <button
+                        type="button"
+                        data-slides-step
+                        aria-label={`View photo ${photoIndex + 1} of ${item.photos.length}`}
+                        aria-current={photoIndex === 0 ? "true" : "false"}
+                      ><span></span></button>
+                    ))}
+                  </div>
+
+                  <p class="visually-hidden" data-slides-status aria-live="polite"></p>
+                </div>
+              ) : (
+                <Image
+                  src={item.photos[0].src}
+                  alt={item.photos[0].alt ?? `${item.name} used at SERA Lab`}
+                  widths={[640, 960, 1280]}
+                  sizes="(max-width: 680px) 100vw, 52vw"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              )}
             </div>
             <div class="hardware-item__content">
               <div class="hardware-item__index">
@@ -93,3 +184,152 @@ const hardware = [
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  /**
+   * Hardware photo slideshows. An item with several photos advances on its own
+   * while it is on screen, and the reader can take over at any time with the
+   * arrows, the rail, the arrow keys, or a swipe. Each manual move restarts the
+   * clock, and hovering or keyboard focus holds the current photo.
+   */
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll<HTMLElement>("[data-hardware-slides]").forEach((carousel) => {
+    const viewport = carousel.querySelector<HTMLElement>("[data-slides-viewport]");
+    const track = carousel.querySelector<HTMLElement>("[data-slides-track]");
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-slides-slide]"));
+    if (!viewport || !track || slides.length < 2) return;
+
+    const steps = Array.from(carousel.querySelectorAll<HTMLButtonElement>("[data-slides-step]"));
+    const previous = carousel.querySelector<HTMLButtonElement>("[data-slides-prev]");
+    const next = carousel.querySelector<HTMLButtonElement>("[data-slides-next]");
+    const status = carousel.querySelector<HTMLElement>("[data-slides-status]");
+    const indexLabel = carousel.querySelector<HTMLElement>("[data-slides-index]");
+    const interval = Number(carousel.dataset.autoplay) || 5000;
+
+    let current = 0;
+    let timer: number | undefined;
+    let visible = !("IntersectionObserver" in window);
+    let hovered = false;
+    let focused = false;
+    let dragStart: number | null = null;
+    let dragDelta = 0;
+
+    const canPlay = () => visible && !hovered && !focused && !document.hidden && !reduceMotion.matches;
+
+    /** Slides wrap, so the slideshow never dead-ends on the first or last photo. */
+    const render = (index: number, announce = true) => {
+      current = (index + slides.length) % slides.length;
+      track.style.transform = `translate3d(${-current * 100}%, 0, 0)`;
+
+      slides.forEach((slide, i) => slide.setAttribute("aria-hidden", i === current ? "false" : "true"));
+      steps.forEach((step, i) => step.setAttribute("aria-current", i === current ? "true" : "false"));
+
+      if (indexLabel) indexLabel.textContent = (current + 1).toString().padStart(2, "0");
+      if (status && announce) status.textContent = `Photo ${current + 1} of ${slides.length}`;
+    };
+
+    /** Starts a fresh beat: the timer and the rail's fill restart together. */
+    const schedule = () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+      timer = undefined;
+
+      carousel.classList.remove("is-counting");
+      if (!canPlay()) return;
+
+      void carousel.offsetWidth;
+      carousel.classList.add("is-counting");
+      timer = window.setTimeout(() => {
+        render(current + 1, false);
+        schedule();
+      }, interval);
+    };
+
+    const goTo = (index: number) => {
+      render(index);
+      schedule();
+    };
+
+    previous?.addEventListener("click", () => goTo(current - 1));
+    next?.addEventListener("click", () => goTo(current + 1));
+    steps.forEach((step, index) => step.addEventListener("click", () => goTo(index)));
+
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      goTo(current + (event.key === "ArrowRight" ? 1 : -1));
+    });
+
+    const finishDrag = (event: PointerEvent) => {
+      if (dragStart === null) return;
+
+      const threshold = Math.min(90, viewport.clientWidth * 0.16);
+      const target = Math.abs(dragDelta) > threshold ? current + (dragDelta < 0 ? 1 : -1) : current;
+
+      if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+      dragStart = null;
+      dragDelta = 0;
+      carousel.classList.remove("is-dragging");
+      goTo(target);
+    };
+
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      dragStart = event.clientX;
+      dragDelta = 0;
+      viewport.setPointerCapture(event.pointerId);
+      carousel.classList.add("is-dragging");
+    });
+
+    viewport.addEventListener("pointermove", (event) => {
+      if (dragStart === null) return;
+      dragDelta = event.clientX - dragStart;
+      track.style.transform = `translate3d(calc(${-current * 100}% + ${dragDelta}px), 0, 0)`;
+    });
+
+    viewport.addEventListener("pointerup", finishDrag);
+    viewport.addEventListener("pointercancel", finishDrag);
+
+    carousel.addEventListener("pointerenter", () => {
+      hovered = true;
+      schedule();
+    });
+    carousel.addEventListener("pointerleave", () => {
+      hovered = false;
+      schedule();
+    });
+
+    /* Only keyboard focus holds the photo. A mouse click also focuses the
+       button, and that should not stop autoplay once the pointer leaves. */
+    carousel.addEventListener("focusin", (event) => {
+      focused = (event.target as HTMLElement).matches(":focus-visible");
+      schedule();
+    });
+    carousel.addEventListener("focusout", (event) => {
+      if (carousel.contains(event.relatedTarget as Node)) return;
+      focused = false;
+      schedule();
+    });
+
+    /* Autoplay runs only while the slideshow is on screen. The first time it
+       comes near, every photo starts loading so no slide arrives blank. */
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            carousel.querySelectorAll<HTMLImageElement>("img").forEach((img) => (img.loading = "eager"));
+          }
+          visible = entry.intersectionRatio >= 0.4;
+          schedule();
+        },
+        { threshold: [0, 0.4] }
+      ).observe(carousel);
+    }
+
+    document.addEventListener("visibilitychange", schedule);
+    reduceMotion.addEventListener("change", schedule);
+
+    render(0, false);
+    schedule();
+  });
+</script>
